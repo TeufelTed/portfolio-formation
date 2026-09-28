@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Sinistre au Mérisier</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#e8ecf0; --surface:#ffffff; --surface-2:#f3f6f8; --line:#ccd6dd;
+    --ink:#101a24; --ink-2:#48586a; --ink-3:#6d7d8d;
+    --accent:#1a6480; --accent-soft:#dceaf1;
+    --ok:#1c6248; --ok-soft:#dcece5; --no:#9c2b2b; --no-soft:#f3dddd;
+    --warn:#8a6100; --warn-soft:#f5ead0;
+    --shadow:0 1px 2px rgba(16,26,36,.08), 0 8px 24px rgba(16,26,36,.06);
+    --serif:"IBM Plex Serif",Georgia,serif;
+    --sans:"IBM Plex Sans",-apple-system,Segoe UI,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --ground:#0d151c; --surface:#151f28; --surface-2:#1b262f; --line:#2c3a45;
+      --ink:#e9eef2; --ink-2:#a7b6c2; --ink-3:#8496a3;
+      --accent:#6fb6d2; --accent-soft:#1d3440;
+      --ok:#7fc9aa; --ok-soft:#17312a; --no:#e79a9a; --no-soft:#38201f;
+      --warn:#dfb75f; --warn-soft:#332a14;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --ground:#0d151c; --surface:#151f28; --surface-2:#1b262f; --line:#2c3a45;
+    --ink:#e9eef2; --ink-2:#a7b6c2; --ink-3:#8496a3;
+    --accent:#6fb6d2; --accent-soft:#1d3440;
+    --ok:#7fc9aa; --ok-soft:#17312a; --no:#e79a9a; --no-soft:#38201f;
+    --warn:#dfb75f; --warn-soft:#332a14;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;padding:0 16px;padding-block:0 40px}
+  .wrap{max-width:1040px;margin:0 auto}
+  header.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--ground);border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline;padding-block:14px 10px;margin-bottom:22px}
+  .dossier-no{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(20px,3.6vw,27px);margin:0;text-wrap:balance;letter-spacing:-.01em}
+  .steps{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.07em}
+  .steps span{color:var(--ink-3);padding:3px 8px;border:1px solid transparent;border-radius:2px}
+  .steps span.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+  h2{font-family:var(--serif);font-size:20px;font-weight:600;margin:0 0 10px;text-wrap:balance}
+  h3{font-family:var(--sans);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:0 0 10px}
+  p{margin:0 0 12px;max-width:68ch}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:20px;box-shadow:var(--shadow)}
+  .grid{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start}
+  @media (max-width:760px){.grid{grid-template-columns:1fr}}
+  button{font-family:inherit;font-size:14px;cursor:pointer}
+  .btn{background:var(--accent);color:#fff;border:1px solid var(--accent);border-radius:3px;padding:9px 16px;font-weight:500}
+  .btn.ghost{background:transparent;color:var(--accent);border-color:var(--line)}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn:focus-visible,.mini:focus-visible,.item:focus-visible,.choice:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .lede{font-family:var(--serif);font-size:17px;line-height:1.6}
+  .objectifs{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:8px;max-width:68ch}
+  .objectifs li{padding-left:22px;position:relative}
+  .objectifs li::before{content:"▸";position:absolute;left:4px;color:var(--accent)}
+  .contacts{display:grid;gap:10px;margin:0}
+  .contact{border:1px solid var(--line);border-radius:3px;padding:12px 14px;background:var(--surface-2);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+  .contact .who{min-width:190px;flex:1}
+  .contact .nom{font-weight:600}
+  .contact .role{font-size:13px;color:var(--ink-2)}
+  .actions{display:flex;gap:6px}
+  .mini{background:transparent;border:1px solid var(--line);border-radius:3px;padding:5px 10px;font-size:12.5px;color:var(--ink);font-family:var(--mono)}
+  .mini:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+  .mini:disabled{opacity:.4;cursor:not-allowed}
+  .compteur{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);border:1px dashed var(--line);border-radius:3px;padding:9px 11px;margin-bottom:14px}
+  .compteur b{color:var(--ink)}
+  .fil{display:grid;gap:12px;margin-top:6px}
+  .entry{border-left:3px solid var(--accent);background:var(--surface-2);padding:11px 14px;border-radius:0 3px 3px 0}
+  .entry .meta{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+  .entry p{margin:0 0 6px}
+  .entry p:last-child{margin:0}
+  .vide{color:var(--ink-3);font-style:italic}
+  .docs{display:grid;gap:8px;margin:0}
+  .doc{display:flex;gap:10px;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:3px;padding:9px 12px;background:var(--surface-2);font-size:14px}
+  .doc .t{font-weight:500}
+  dialog{border:1px solid var(--line);border-radius:4px;background:var(--surface);color:var(--ink);max-width:640px;width:calc(100% - 32px);padding:0;box-shadow:var(--shadow)}
+  dialog::backdrop{background:rgba(8,16,22,.55)}
+  .dlg-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+  .dlg-body{padding:18px 20px;max-height:62vh;overflow:auto}
+  .dlg-body .art{font-family:var(--mono);font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+  .dlg-body table{width:100%;border-collapse:collapse;font-size:14px;margin:4px 0 12px}
+  .dlg-body th,.dlg-body td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}
+  .dlg-body td:last-child,.dlg-body th:last-child{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+  .tri{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+  @media (max-width:640px){.tri{grid-template-columns:1fr}}
+  .bucket{border:1.5px dashed var(--line);border-radius:4px;padding:12px;min-height:110px;background:var(--surface-2)}
+  .bucket.over{border-color:var(--accent);background:var(--accent-soft)}
+  .bucket h3{margin-bottom:8px;color:var(--ink)}
+  .pool{display:grid;gap:8px;margin:10px 0 4px}
+  .item{border:1px solid var(--line);border-radius:3px;background:var(--surface);padding:9px 11px;font-size:14px;cursor:grab;display:flex;gap:8px;align-items:baseline;justify-content:space-between}
+  .item[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+  .item .tag{font-family:var(--mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+  .qbloc{border-top:1px solid var(--line);margin-top:20px;padding-top:16px}
+  .choices{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+  .choice{background:var(--surface-2);border:1px solid var(--line);border-radius:3px;padding:8px 13px;font-family:var(--mono);font-size:13px;color:var(--ink)}
+  .choice[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+  .verdict{border-radius:3px;padding:11px 13px;margin-bottom:10px;border:1px solid var(--line)}
+  .verdict.ok{background:var(--ok-soft);border-color:var(--ok)}
+  .verdict.no{background:var(--no-soft);border-color:var(--no)}
+  .verdict .head{font-weight:600;margin-bottom:3px}
+  .verdict .why{font-size:14px;color:var(--ink-2)}
+  .note{background:var(--warn-soft);border:1px solid var(--warn);border-radius:3px;padding:12px 14px;margin:12px 0;font-size:14px}
+  .score{font-family:var(--mono);font-size:13px;color:var(--ink-2);margin-bottom:14px;font-variant-numeric:tabular-nums}
+  footer{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3);max-width:68ch}
+  .hint{font-size:13px;color:var(--ink-3);margin-top:8px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header class="bar">
+    <div>
+      <div class="dossier-no">Dossier 26-8871 · Syndicat Le Mérisier · unité 302</div>
+      <h1>Sinistre au Mérisier</h1>
+    </div>
+    <nav class="steps" aria-label="Étapes">
+      <span id="st1" class="on">Mise en situation</span>
+      <span id="st2">Enquête</span>
+      <span id="st3">Décision</span>
+      <span id="st4">Rétroaction</span>
+    </nav>
+  </header>
+
+  <section id="ecran1">
+    <div class="card">
+      <h2>Vous êtes l'expert en sinistre au dossier</h2>
+      <p class="lede">Un raccord a cédé sur une colonne d'alimentation en eau, dans le mur mitoyen du 302 de l'immeuble Le Mérisier. L'eau a coulé une partie de la nuit. Le plancher de bois franc du 302 gonfle, le bas des armoires de cuisine est gorgé d'eau, et le plafond du 202, juste en dessous, est taché sur deux mètres.</p>
+      <p>La copropriétaire du 302 vous appelle : elle veut savoir qui paie son plancher, posé il y a deux ans. Le gestionnaire de l'immeuble vous écrit de son côté. Vous n'avez encore aucun document au dossier.</p>
+      <h3>Au terme de cette mise en situation, vous serez en mesure de</h3>
+      <ul class="objectifs">
+        <li>choisir les interlocuteurs à joindre et l'ordre dans lequel les joindre ;</li>
+        <li>distinguer les parties communes, l'unité standard de base et les améliorations, à partir des documents du syndicat ;</li>
+        <li>répartir les dommages entre l'assurance du syndicat et celle de la copropriétaire ;</li>
+        <li>déterminer si la part assurée par le syndicat dépasse sa franchise.</li>
+      </ul>
+      <button class="btn" id="go1">Ouvrir le dossier</button>
+      <p class="hint">Cas fictif, écrit pour ce portfolio. Les règles présentées sont celles des documents de ce syndicat. La franchise change d'une partie à l'autre : elle se lit dans la police.</p>
+    </div>
+  </section>
+
+  <section id="ecran2" hidden>
+    <div class="grid">
+      <div class="card">
+        <h2>Enquête</h2>
+        <div class="compteur" id="compteur"></div>
+        <div class="contacts" id="contacts"></div>
+        <button class="btn" id="go2" style="margin-top:16px">Passer à la décision</button>
+        <p class="hint">Aucune limite de démarches. Vos démarches sont comptées et comparées, à la fin, au minimum requis pour trancher.</p>
+      </div>
+      <div style="display:grid;gap:18px">
+        <div class="card">
+          <h3>Fil du dossier</h3>
+          <div class="fil" id="fil"><p class="vide">Aucune démarche pour l'instant.</p></div>
+        </div>
+        <div class="card">
+          <h3>Documents au dossier</h3>
+          <div class="docs" id="docs"><p class="vide">Aucun document reçu.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ecran3" hidden>
+    <div class="grid">
+      <div class="card">
+        <h2>Qui paie quoi ?</h2>
+        <p>Glissez chaque élément dans la colonne qui convient, ou touchez l'élément puis la colonne.</p>
+        <div class="pool" id="pool"></div>
+        <div class="tri">
+          <div class="bucket" data-bucket="syndicat">
+            <h3>Assurance du syndicat</h3>
+            <div class="pool" id="b-syndicat"></div>
+          </div>
+          <div class="bucket" data-bucket="coproprietaire">
+            <h3>Assurance de la copropriétaire</h3>
+            <div class="pool" id="b-coproprietaire"></div>
+          </div>
+        </div>
+
+        <div class="qbloc">
+          <h2>La franchise</h2>
+          <p>Quel est le montant de la franchise de la police du syndicat ?</p>
+          <div class="choices" id="q-franchise"></div>
+          <p>La part assurée par le syndicat dépasse-t-elle cette franchise ?</p>
+          <div class="choices" id="q-depasse"></div>
+        </div>
+
+        <button class="btn" id="go3" style="margin-top:6px" disabled>Valider mes réponses</button>
+      </div>
+      <div class="card">
+        <h3>Documents au dossier</h3>
+        <div class="docs" id="docs2"><p class="vide">Aucun document reçu.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ecran4" hidden>
+    <div class="card">
+      <h2>Rétroaction</h2>
+      <div class="score" id="score"></div>
+      <div id="verdicts"></div>
+      <div id="debrief"></div>
+      <button class="btn ghost" id="recommencer" style="margin-top:8px">Recommencer</button>
+    </div>
+  </section>
+
+  <footer>
+    Mise en situation conçue par Thierry De Gagné pour son portfolio. Immeuble, personnes, documents et montants sont fictifs. Le scénarimage et la fiche de conception de ce module accompagnent cette page.
+  </footer>
+</div>
+
+<dialog id="dlg">
+  <div class="dlg-head">
+    <h2 id="dlg-t" style="margin:0"></h2>
+    <button class="mini" id="dlg-x">Fermer</button>
+  </div>
+  <div class="dlg-body" id="dlg-b"></div>
+</dialog>
+
+<script>
+const PART_SYNDICAT = 19500, PART_COPRO = 15100;
+const MIN_DEMARCHES = 3;
+const FRANCHISES = [10000, 15000, 20000, 25000];
+const money = n => n.toLocaleString("fr-CA").replace(/ /g," ") + " $";
+
+const state = {n:0, used:new Set(), docs:[], sel:null, place:{}, franchise:null, repF:null, repD:null};
+state.franchise = FRANCHISES[Math.floor(Math.random()*FRANCHISES.length)];
+
+const DOCS = {
+  decl: {titre:"Déclaration de copropriété (extraits)", html:()=>`
+    <div class="art">Article 41 — Parties communes</div>
+    <p>Sont notamment parties communes les colonnes d'alimentation en eau, les colonnes de chute, les conduits verticaux et les gaines techniques qui desservent plus d'une fraction, même lorsqu'ils traversent une partie privative.</p>
+    <div class="art">Article 42 — Unité standard de base</div>
+    <p>L'unité standard de base de chaque fraction est décrite dans une annexe distincte, adoptée par l'assemblée des copropriétaires et conservée au registre du syndicat.</p>
+    <div class="art">Article 43 — Améliorations</div>
+    <p>Tout ouvrage qui dépasse l'unité standard de base est une amélioration. Elle demeure à la charge du copropriétaire, qui doit l'assurer, même lorsqu'elle est endommagée par un sinistre visant les parties communes.</p>`},
+  usb: {titre:"Description de l'unité standard de base", html:()=>`
+    <div class="art">Annexe C — adoptée à l'assemblée du 12 juin 2019</div>
+    <p>L'unité standard de base de chaque fraction comprend :</p>
+    <p>• les cloisons et les plafonds de gypse peint ;<br>
+       • les portes intérieures de bois moulé ;<br>
+       • les armoires de cuisine et de salle de bain de mélamine blanche ;<br>
+       • le comptoir de stratifié ;<br>
+       • le tapis de nylon ou le revêtement de vinyle au sol ;<br>
+       • les appareils sanitaires de porcelaine blanche.</p>
+    <p>Tout revêtement, matériau ou appareil de qualité supérieure à ceux énumérés ci-dessus constitue une amélioration au sens de l'article 43 de la déclaration.</p>`},
+  police_synd: {titre:"Police du syndicat (extraits)", html:()=>`
+    <div class="art">Assuré</div>
+    <p>Syndicat des copropriétaires Le Mérisier, 4210, rue des Ormes, Montréal.</p>
+    <div class="art">Biens assurés</div>
+    <p>L'immeuble, les parties communes et l'unité standard de base de chaque fraction, telle que décrite par l'annexe adoptée par l'assemblée des copropriétaires.</p>
+    <div class="art">Exclusion</div>
+    <p>Les améliorations apportées par un copropriétaire à sa fraction.</p>
+    <div class="art">Franchise</div>
+    <p><strong>${money(state.franchise)}</strong> par sinistre, à la charge du syndicat.</p>`},
+  police_copro: {titre:"Police de la copropriétaire (extraits)", html:()=>`
+    <div class="art">Avenant — Améliorations apportées à l'unité</div>
+    <p>Montant de garantie : 30 000 $. Couvre les améliorations et les ajouts apportés par l'assurée à sa fraction.</p>
+    <div class="art">Biens meubles</div>
+    <p>Montant de garantie : 60 000 $. Mobilier et effets personnels de l'assurée.</p>
+    <div class="art">Franchise</div>
+    <p>1 000 $ par sinistre.</p>`},
+  rapport: {titre:"Rapport d'intervention — Sinistres Beauchemin", html:()=>`
+    <div class="art">Cause</div>
+    <p>Rupture d'un raccord soudé sur la colonne d'alimentation en eau desservant les unités 102 à 402, dans le mur mitoyen du 302. Aucune négligence constatée d'un occupant.</p>
+    <div class="art">Eau</div>
+    <p>Eau propre, catégorie 1. Écoulement estimé à six heures. Assèchement en cours, cinq jours prévus.</p>
+    <div class="art">Dommages relevés</div>
+    <p>302 : plancher de bois franc (28 m²) gonflé sur toute la surface ; armoires de cuisine de mélamine blanche, caissons du bas gorgés d'eau ; mobilier du salon atteint. 202 : plafond de gypse peint taché et affaissé sur 2 m².</p>`},
+  estimation: {titre:"Estimation des travaux", html:()=>`
+    <div class="art">Sinistres Beauchemin — estimation préliminaire</div>
+    <table>
+      <tr><th>Poste</th><th>Montant</th></tr>
+      <tr><td>Plomberie et réfection du mur mitoyen</td><td>4 200 $</td></tr>
+      <tr><td>Armoires de cuisine, unité 302</td><td>6 800 $</td></tr>
+      <tr><td>Plafond de gypse, unité 202</td><td>3 100 $</td></tr>
+      <tr><td>Assèchement et nettoyage</td><td>5 400 $</td></tr>
+      <tr><td>Plancher de bois franc, unité 302</td><td>11 200 $</td></tr>
+      <tr><td>Mobilier du salon, unité 302</td><td>3 900 $</td></tr>
+      <tr><td><strong>Total</strong></td><td><strong>34 600 $</strong></td></tr>
+    </table>
+    <p>Les montants sont préliminaires et ne tiennent pas compte de la répartition entre les assurances.</p>`},
+  facture: {titre:"Facture du plombier", html:()=>`
+    <div class="art">Intervention d'urgence</div>
+    <p>Fermeture de la colonne, remplacement du raccord défectueux et remise en service. 1 340 $ avant taxes.</p>
+    <p>Note du plombier : le raccord était d'origine. Aucune trace de gel ni de choc.</p>`}
+};
+
+const CONTACTS = [
+  {id:"copro", nom:"Sylvie Léveillé", role:"Copropriétaire, unité 302",
+   tel:{txt:"« Mon plancher de bois, je l'ai fait poser il y a deux ans, 9 000 $. Avant, c'était le tapis d'origine. Le syndicat me dit de voir avec mon assureur, mon assureur me dit de voir avec le syndicat. Là, je tourne en rond. »"},
+   courriel:{txt:"Elle vous transmet sa police d'assurance.", docs:["police_copro"]}},
+  {id:"gest", nom:"Karim Bélanger", role:"Gestionnaire, Gestion Bellerive",
+   tel:{txt:"« Le plombier est venu à 3 h du matin, c'est un raccord sur la colonne commune qui a lâché. Je vous envoie la déclaration et la police du syndicat. Pour la description de l'unité standard de base, c'est une annexe adoptée en assemblée : c'est la présidente qui a le registre. »"},
+   courriel:{txt:"Il vous transmet la déclaration de copropriété et la police du syndicat.", docs:["decl","police_synd"]}},
+  {id:"presi", nom:"Josée Tremblay", role:"Présidente du conseil d'administration",
+   tel:{txt:"« Le conseil ne veut pas d'une réclamation pour rien : nos primes ont déjà monté l'an dernier et on a rehaussé la franchise à ce moment-là. Le montage exact, je ne l'ai pas en tête, c'est dans la police. »"},
+   courriel:{txt:"Elle vous transmet l'annexe qui décrit l'unité standard de base, adoptée à l'assemblée de 2019.", docs:["usb"]}},
+  {id:"voisin", nom:"Denis Roy", role:"Copropriétaire, unité 202",
+   tel:{txt:"« Mon plafond est taché et il commence à pendre. C'est le gypse d'origine, je n'ai jamais rien changé là. Je veux juste que ce soit réparé. »"}},
+  {id:"entre", nom:"Sinistres Beauchemin", role:"Entrepreneur en après-sinistre",
+   tel:{txt:"« On assèche depuis ce matin. Le bois franc ne se sauvera pas, les caissons du bas non plus. Le rapport et l'estimation s'en viennent. »"},
+   courriel:{txt:"L'entrepreneur dépose son rapport d'intervention, l'estimation des travaux et la facture du plombier.", docs:["rapport","estimation","facture"]}},
+  {id:"courtier", nom:"Marc Ouellet", role:"Courtier du syndicat",
+   tel:{txt:"« La police couvre l'immeuble et l'unité standard de base, pas les améliorations. Pour la franchise, lisez les conditions particulières : elle a changé au dernier renouvellement et je ne veux pas vous donner un chiffre de mémoire. »"},
+   courriel:{txt:"Il vous transmet une copie de la police du syndicat.", docs:["police_synd"]}}
+];
+
+const ITEMS = [
+  {id:"colonne", txt:"Le raccord et la colonne d'alimentation", tag:"partie commune", bon:"syndicat",
+   why:"La colonne dessert plusieurs fractions : c'est une partie commune (article 41), assurée par le syndicat."},
+  {id:"armoires", txt:"Les armoires de cuisine de mélamine blanche du 302", tag:"unité 302", bon:"syndicat",
+   why:"L'annexe adoptée en assemblée place les armoires de mélamine blanche dans l'unité standard de base. Elles relèvent donc de la police du syndicat."},
+  {id:"plafond", txt:"Le plafond de gypse peint du 202", tag:"unité 202", bon:"syndicat",
+   why:"Du gypse peint d'origine, donc l'unité standard de base. Que l'eau vienne d'une autre unité ne change rien : c'est le syndicat qui assure."},
+  {id:"plancher", txt:"Le plancher de bois franc du 302", tag:"unité 302", bon:"coproprietaire",
+   why:"L'annexe prévoit du tapis ou du vinyle. Le bois franc est une amélioration (article 43), à la charge de la copropriétaire, même si le sinistre vient des parties communes."},
+  {id:"meubles", txt:"Le mobilier du salon du 302", tag:"biens meubles", bon:"coproprietaire",
+   why:"Les biens meubles n'ont jamais fait partie de l'immeuble. Ils relèvent de la police de la copropriétaire."}
+];
+
+const $ = s => document.querySelector(s);
+const show = n => { [1,2,3,4].forEach(i=>{ $("#ecran"+i).hidden=(i!==n); $("#st"+i).classList.toggle("on", i===n); }); window.scrollTo({top:0,behavior:"smooth"}); };
+
+function renderContacts(){
+  const c = $("#contacts"); c.innerHTML="";
+  CONTACTS.forEach(p=>{
+    const div=document.createElement("div"); div.className="contact";
+    const who=document.createElement("div"); who.className="who";
+    who.innerHTML=`<div class="nom">${p.nom}</div><div class="role">${p.role}</div>`;
+    const act=document.createElement("div"); act.className="actions";
+    ["tel","courriel"].forEach(ch=>{
+      if(!p[ch]) return;
+      const key=p.id+"-"+ch;
+      const b=document.createElement("button"); b.className="mini";
+      b.textContent = ch==="tel" ? "Téléphoner" : "Écrire";
+      b.disabled = state.used.has(key);
+      b.onclick = ()=>demarche(p,ch,key);
+      act.appendChild(b);
+    });
+    div.append(who,act); c.appendChild(div);
+  });
+  $("#compteur").innerHTML = `Démarches effectuées : <b>${state.n}</b> · documents au dossier : <b>${state.docs.length}</b>. Le téléphone répond tout de suite ; le courriel rapporte des documents, mais la réponse arrive le lendemain.`;
+}
+
+function demarche(p,ch,key){
+  state.used.add(key); state.n++;
+  const d=p[ch];
+  const fil=$("#fil"); if(fil.querySelector(".vide")) fil.innerHTML="";
+  const e=document.createElement("div"); e.className="entry";
+  e.innerHTML=`<div class="meta">${ch==="tel"?"Appel · aujourd'hui":"Courriel · réponse le lendemain"} — ${p.nom}</div><p>${d.txt}</p>`;
+  if(d.docs){
+    const neufs=d.docs.filter(x=>!state.docs.includes(x));
+    d.docs.forEach(x=>{ if(!state.docs.includes(x)) state.docs.push(x); });
+    e.innerHTML += `<p class="meta" style="margin:0">${neufs.length?"Ajouté au dossier : "+neufs.map(x=>DOCS[x].titre).join(", "):"Rien de nouveau au dossier."}</p>`;
+  }
+  fil.appendChild(e); renderDocs(); renderContacts();
+}
+
+function renderDocs(){
+  ["#docs","#docs2"].forEach(sel=>{
+    const box=$(sel); if(!box) return; box.innerHTML="";
+    if(!state.docs.length){ box.innerHTML=`<p class="vide">Aucun document reçu.</p>`; return; }
+    state.docs.forEach(id=>{
+      const row=document.createElement("div"); row.className="doc";
+      row.innerHTML=`<span class="t">${DOCS[id].titre}</span>`;
+      const b=document.createElement("button"); b.className="mini"; b.textContent="Lire";
+      b.onclick=()=>{ $("#dlg-t").textContent=DOCS[id].titre; $("#dlg-b").innerHTML=DOCS[id].html(); $("#dlg").showModal(); };
+      row.appendChild(b); box.appendChild(row);
+    });
+  });
+}
+
+function itemEl(it){
+  const d=document.createElement("div");
+  d.className="item"; d.draggable=true; d.tabIndex=0; d.id="it-"+it.id;
+  d.setAttribute("role","button"); d.setAttribute("aria-pressed","false");
+  d.innerHTML=`<span>${it.txt}</span><span class="tag">${it.tag}</span>`;
+  d.addEventListener("dragstart",ev=>{ ev.dataTransfer.setData("text/plain",it.id); state.sel=it.id; });
+  d.addEventListener("click",()=>select(it.id));
+  d.addEventListener("keydown",ev=>{ if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();select(it.id);} });
+  return d;
+}
+function select(id){
+  state.sel = (state.sel===id) ? null : id;
+  document.querySelectorAll(".item").forEach(el=>el.setAttribute("aria-pressed", (el.id==="it-"+id && state.sel===id)?"true":"false"));
+}
+function place(id,bucket){
+  state.place[id]=bucket; $("#b-"+bucket).appendChild($("#it-"+id));
+  state.sel=null; document.querySelectorAll(".item").forEach(e=>e.setAttribute("aria-pressed","false"));
+  majBouton();
+}
+function majBouton(){
+  $("#go3").disabled = !(Object.keys(state.place).length===ITEMS.length && state.repF && state.repD);
+}
+
+function renderTri(){
+  $("#pool").innerHTML=""; $("#b-syndicat").innerHTML=""; $("#b-coproprietaire").innerHTML="";
+  state.place={}; state.repF=null; state.repD=null;
+  ITEMS.forEach(it=>$("#pool").appendChild(itemEl(it)));
+  document.querySelectorAll(".bucket").forEach(b=>{
+    b.ondragover = ev=>{ ev.preventDefault(); b.classList.add("over"); };
+    b.ondragleave = ()=>b.classList.remove("over");
+    b.ondrop = ev=>{ ev.preventDefault(); b.classList.remove("over");
+      const id=ev.dataTransfer.getData("text/plain")||state.sel; if(id) place(id,b.dataset.bucket); };
+    b.onclick = ()=>{ if(state.sel) place(state.sel,b.dataset.bucket); };
+  });
+  const qf=$("#q-franchise"); qf.innerHTML="";
+  FRANCHISES.forEach(v=>{
+    const b=document.createElement("button"); b.className="choice"; b.textContent=money(v);
+    b.setAttribute("aria-pressed","false");
+    b.onclick=()=>{ state.repF=v; qf.querySelectorAll(".choice").forEach(x=>x.setAttribute("aria-pressed","false")); b.setAttribute("aria-pressed","true"); majBouton(); };
+    qf.appendChild(b);
+  });
+  const qd=$("#q-depasse"); qd.innerHTML="";
+  [["oui","Oui, elle dépasse la franchise"],["non","Non, elle reste sous la franchise"]].forEach(([v,lbl])=>{
+    const b=document.createElement("button"); b.className="choice"; b.textContent=lbl;
+    b.setAttribute("aria-pressed","false");
+    b.onclick=()=>{ state.repD=v; qd.querySelectorAll(".choice").forEach(x=>x.setAttribute("aria-pressed","false")); b.setAttribute("aria-pressed","true"); majBouton(); };
+    qd.appendChild(b);
+  });
+  majBouton();
+}
+
+function retroaction(){
+  const nom = b => b==="syndicat" ? "l'assurance du syndicat" : "l'assurance de la copropriétaire";
+  let bons=0;
+  const v=$("#verdicts"); v.innerHTML="";
+  ITEMS.forEach(it=>{
+    const rep=state.place[it.id], ok=rep===it.bon; if(ok) bons++;
+    const d=document.createElement("div"); d.className="verdict "+(ok?"ok":"no");
+    d.innerHTML=`<div class="head">${it.txt} — ${ok?"bien classé":"à revoir"}</div>
+      <div class="why">${ok?"":`Vous avez répondu ${nom(rep)}. La bonne réponse est ${nom(it.bon)}. `}${it.why}</div>`;
+    v.appendChild(d);
+  });
+
+  const depasse = PART_SYNDICAT > state.franchise;
+  const bonF = state.repF===state.franchise;
+  const bonD = (state.repD==="oui")===depasse;
+  const dF=document.createElement("div"); dF.className="verdict "+(bonF?"ok":"no");
+  dF.innerHTML=`<div class="head">Montant de la franchise — ${bonF?"exact":"à revoir"}</div>
+    <div class="why">La police du syndicat prévoit une franchise de ${money(state.franchise)} par sinistre, à la charge du syndicat.${bonF?"":" C'est le seul endroit où ce montant se trouve : au téléphone, ni la présidente ni le courtier ne le donnent."}</div>`;
+  v.appendChild(dF);
+  const dD=document.createElement("div"); dD.className="verdict "+(bonD?"ok":"no");
+  dD.innerHTML=`<div class="head">Dépassement de la franchise — ${bonD?"exact":"à revoir"}</div>
+    <div class="why">La part assurée par le syndicat (parties communes et unité standard de base) totalise ${money(PART_SYNDICAT)} : plomberie et mur 4 200 $, armoires 6 800 $, plafond du 202 3 100 $, assèchement 5 400 $. Elle ${depasse?"dépasse":"reste sous"} la franchise de ${money(state.franchise)}, donc ${depasse?"une réclamation au syndicat est justifiée.":"le syndicat absorbe les travaux sans réclamer. Une réclamation ne paierait rien et marquerait son dossier."} Les ${money(PART_COPRO)} de la copropriétaire (plancher 11 200 $, mobilier 3 900 $) ne comptent pas dans ce calcul : ils relèvent de sa propre police.</div>`;
+  v.appendChild(dD);
+
+  $("#score").textContent = `${bons} sur ${ITEMS.length} éléments bien classés · franchise ${bonF?"exacte":"inexacte"} · dépassement ${bonD?"exact":"inexact"} · ${state.n} démarche${state.n>1?"s":""} pour un minimum requis de ${MIN_DEMARCHES}`;
+
+  const deb=$("#debrief"); deb.innerHTML="";
+  const notes=[];
+  if(!state.docs.includes("usb")) notes.push("Vous avez tranché sans l'annexe qui décrit l'unité standard de base. C'est elle, et elle seule, qui dit si le bois franc est une amélioration dans cet immeuble. La déclaration y renvoie sans la reproduire.");
+  if(!state.docs.includes("decl")) notes.push("Vous n'avez pas obtenu la déclaration de copropriété : rien au dossier n'établit que la colonne est une partie commune.");
+  if(!state.docs.includes("police_synd")) notes.push("Sans la police du syndicat, le montant de la franchise ne pouvait qu'être deviné.");
+  if(!state.docs.includes("estimation")) notes.push("Sans l'estimation des travaux, la comparaison avec la franchise ne repose sur aucun chiffre.");
+  if(!state.docs.includes("rapport")) notes.push("Vous n'avez pas le rapport d'intervention, qui établit la cause du sinistre par écrit. Un assureur vous le demandera.");
+  if(state.n<=MIN_DEMARCHES && bons===ITEMS.length && bonF && bonD) notes.push("Dossier réglé au minimum de démarches, sans erreur : trois courriels bien choisis suffisaient, au gestionnaire, à la présidente et à l'entrepreneur.");
+  else if(state.n>MIN_DEMARCHES+3) notes.push(`Vous avez fait ${state.n} démarches pour un minimum de ${MIN_DEMARCHES}. Chaque appel de plus retarde l'assèchement et la réparation, et use la patience des copropriétaires.`);
+  notes.push("À retenir : la franchise reste à la charge du syndicat. Elle ne se facture pas à la copropriétaire, même quand ses améliorations sont en cause.");
+  notes.forEach(t=>{ const p=document.createElement("div"); p.className="note"; p.textContent=t; deb.appendChild(p); });
+}
+
+$("#go1").onclick=()=>{ renderContacts(); renderDocs(); show(2); };
+$("#go2").onclick=()=>{ renderTri(); renderDocs(); show(3); };
+$("#go3").onclick=()=>{ retroaction(); show(4); };
+$("#dlg-x").onclick=()=>$("#dlg").close();
+$("#recommencer").onclick=()=>{
+  state.n=0; state.used=new Set(); state.docs=[]; state.sel=null; state.place={}; state.repF=null; state.repD=null;
+  state.franchise = FRANCHISES[Math.floor(Math.random()*FRANCHISES.length)];
+  $("#fil").innerHTML=`<p class="vide">Aucune démarche pour l'instant.</p>`;
+  renderContacts(); renderDocs(); show(1);
+};
+renderContacts(); renderDocs();
+</script>
+
+</body>
+</html>

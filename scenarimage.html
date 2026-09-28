@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Scénarimage du Mérisier</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#e8ecf0; --surface:#ffffff; --surface-2:#f3f6f8; --line:#ccd6dd;
+    --ink:#101a24; --ink-2:#48586a; --ink-3:#6d7d8d;
+    --accent:#1a6480; --accent-soft:#dceaf1;
+    --warn-soft:#f5ead0; --warn:#8a6100;
+    --shadow:0 1px 2px rgba(16,26,36,.08), 0 8px 24px rgba(16,26,36,.06);
+    --serif:"IBM Plex Serif",Georgia,serif;
+    --sans:"IBM Plex Sans",-apple-system,Segoe UI,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --ground:#0d151c; --surface:#151f28; --surface-2:#1b262f; --line:#2c3a45;
+      --ink:#e9eef2; --ink-2:#a7b6c2; --ink-3:#8496a3;
+      --accent:#6fb6d2; --accent-soft:#1d3440;
+      --warn-soft:#332a14; --warn:#dfb75f;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --ground:#0d151c; --surface:#151f28; --surface-2:#1b262f; --line:#2c3a45;
+    --ink:#e9eef2; --ink-2:#a7b6c2; --ink-3:#8496a3;
+    --accent:#6fb6d2; --accent-soft:#1d3440;
+    --warn-soft:#332a14; --warn:#dfb75f;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;padding:0 16px;padding-block:0 48px}
+  .wrap{max-width:900px;margin:0 auto}
+  header{border-bottom:1px solid var(--line);padding-block:22px 16px;margin-bottom:24px}
+  .kicker{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
+  h1{font-family:var(--serif);font-size:clamp(23px,4vw,31px);font-weight:600;margin:6px 0 10px;letter-spacing:-.01em;text-wrap:balance}
+  p{margin:0 0 12px;max-width:70ch}
+  h2{font-family:var(--serif);font-size:20px;font-weight:600;margin:32px 0 12px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:18px 20px;box-shadow:var(--shadow);margin-bottom:16px}
+  .meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 22px}
+  .meta-grid div span{display:block;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-3);margin-bottom:2px}
+  .ecran{background:var(--surface);border:1px solid var(--line);border-radius:4px;box-shadow:var(--shadow);margin-bottom:18px;overflow:hidden}
+  .ecran-head{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between;background:var(--surface-2);border-bottom:1px solid var(--line);padding:11px 18px}
+  .ecran-head .no{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.06em}
+  .ecran-head .titre{font-family:var(--serif);font-size:17px;font-weight:600}
+  .ecran-head .type{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-3)}
+  .rows{display:grid}
+  .row{display:grid;grid-template-columns:172px 1fr;gap:0;border-bottom:1px solid var(--line)}
+  .row:last-child{border-bottom:none}
+  .row > .lab{background:var(--surface-2);border-right:1px solid var(--line);padding:11px 14px;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3)}
+  .row > .val{padding:11px 16px}
+  .row > .val p{margin:0 0 8px}
+  .row > .val p:last-child{margin:0}
+  @media (max-width:620px){
+    .row{grid-template-columns:1fr}
+    .row > .lab{border-right:none;border-bottom:1px solid var(--line)}
+  }
+  .audio{font-family:var(--mono);font-size:12.5px;color:var(--accent)}
+  ul{margin:0 0 8px;padding-left:20px}
+  li{margin-bottom:5px}
+  .note{background:var(--warn-soft);border:1px solid var(--warn);border-radius:3px;padding:12px 14px;font-size:14px;margin:16px 0}
+  code{font-family:var(--mono);font-size:13px;background:var(--surface-2);border:1px solid var(--line);border-radius:2px;padding:1px 5px}
+  footer{margin-top:32px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3);max-width:70ch}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header>
+  <div class="kicker">Scénarimage · version 1.0 · septembre 2026</div>
+  <h1>Sinistre au Mérisier</h1>
+  <p>Scénarimage de production du module interactif « Sinistre au Mérisier ». Gabarit et contenu de Thierry De Gagné. Le cas, les personnes, les documents et les montants sont fictifs.</p>
+</header>
+
+<div class="card">
+  <div class="meta-grid">
+    <div><span>Chargé de projet</span>Thierry De Gagné</div>
+    <div><span>Conception pédagogique</span>Thierry De Gagné</div>
+    <div><span>Expert de contenu</span>Fictif — pratique en indemnisation et en copropriété</div>
+    <div><span>Intégration</span>HTML et JavaScript, générés en vibe coding</div>
+    <div><span>Public cible</span>Experts en sinistre, dommages matériels</div>
+    <div><span>Durée visée</span>12 à 18 minutes, selon le nombre de démarches</div>
+    <div><span>Diffusion</span>Page web autonome, sans plugiciel</div>
+    <div><span>Langues</span>Français ; version anglaise prévue</div>
+  </div>
+</div>
+
+<h2>Directives générales</h2>
+<div class="card">
+  <div class="rows">
+    <div class="row"><div class="lab">Menu</div><div class="val">Aucun menu libre. Progression par étapes verrouillées : mise en situation, enquête, décision, rétroaction. L'apprenant décide quand passer à l'étape suivante, mais ne revient pas en arrière.</div></div>
+    <div class="row"><div class="lab">Structure</div><div class="val">Quatre écrans principaux, un module de lecture de documents en fenêtre superposée, et un débreffage assemblé à partir du parcours réel de l'apprenant.</div></div>
+    <div class="row"><div class="lab">Personnages</div><div class="val">Six interlocuteurs, joignables par téléphone ou par courriel. Chacun a une voix distincte : la copropriétaire est exaspérée, le gestionnaire est efficace et un peu sec, la présidente pense budget, le voisin veut juste des réparations, l'entrepreneur parle terrain, le courtier est prudent.</div></div>
+    <div class="row"><div class="lab">Lexique</div><div class="val">Parties communes · unité standard de base · amélioration · franchise · syndicat · fraction. Les termes ne sont jamais définis hors contexte : ils se découvrent dans les documents du dossier.</div></div>
+    <div class="row"><div class="lab">Variables</div><div class="val"><code>franchise</code> tirée au hasard parmi 10 000, 15 000, 20 000 et 25 000 $ à chaque tentative · <code>demarches</code> compteur d'actions · <code>documents</code> liste des pièces obtenues · <code>repartition</code> réponses du tri.</div></div>
+    <div class="row"><div class="lab">Règle de conception</div><div class="val">Aucune rétroaction ne révèle une information que l'apprenant n'a pas obtenue par ses démarches. L'information manquante est nommée comme telle, et l'erreur est reliée à la démarche omise.</div></div>
+  </div>
+</div>
+
+<h2>Écrans</h2>
+
+<div class="ecran">
+  <div class="ecran-head"><span class="no">Écran 01</span><span class="titre">Mise en situation</span><span class="type">statique</span></div>
+  <div class="rows">
+    <div class="row"><div class="lab">Visuel</div><div class="val">En-tête de dossier : numéro 26-8871, nom du syndicat, unité visée. Aucune illustration : la page prend l'apparence d'un dossier de réclamation.</div></div>
+    <div class="row"><div class="lab">Texte à l'écran</div><div class="val"><p>« Vous êtes l'expert en sinistre au dossier. » Description du sinistre : raccord cédé sur une colonne d'alimentation, dans le mur mitoyen du 302 ; plancher de bois franc gonflé, bas des armoires gorgé d'eau, plafond du 202 taché sur deux mètres.</p><p>Objectifs : choisir ses interlocuteurs ; distinguer parties communes, unité standard de base et améliorations ; répartir les dommages ; déterminer si la part du syndicat dépasse la franchise.</p></div></div>
+    <div class="row"><div class="lab">Narration</div><div class="val"><p class="audio">NAR_01.mp3</p><p>« Il est 8 h 15. Votre premier appel de la journée est celui d'une copropriétaire qui veut savoir qui paie son plancher. Vous n'avez encore rien au dossier. »</p></div></div>
+    <div class="row"><div class="lab">Rétroactions</div><div class="val">Aucune.</div></div>
+    <div class="row"><div class="lab">Actions et embranchements</div><div class="val">Bouton « Ouvrir le dossier » → écran 02. Mention permanente en bas d'écran : cas fictif. Tirage de la variable <code>franchise</code> au chargement.</div></div>
+  </div>
+</div>
+
+<div class="ecran">
+  <div class="ecran-head"><span class="no">Écran 02</span><span class="titre">Enquête</span><span class="type">interactif · cœur du module</span></div>
+  <div class="rows">
+    <div class="row"><div class="lab">Visuel</div><div class="val">Deux zones. À gauche, les six interlocuteurs, chacun avec deux boutons : Téléphoner, Écrire. À droite, le fil du dossier qui s'allonge, et la liste des documents reçus.</div></div>
+    <div class="row"><div class="lab">Texte à l'écran</div><div class="val"><p>Compteur : « Démarches effectuées : N · documents au dossier : N ». Consigne : le téléphone répond tout de suite ; le courriel rapporte des documents, mais la réponse arrive le lendemain.</p><p>Aucune limite de démarches. La consigne précise qu'elles seront comparées, à la fin, au minimum requis.</p></div></div>
+    <div class="row"><div class="lab">Narration</div><div class="val"><p class="audio">NAR_02.mp3</p><p>« À vous de décider qui vous joignez, et comment. Chaque appel donne une réponse immédiate ; chaque courriel rapporte des pièces, mais vous coûte une journée. »</p></div></div>
+    <div class="row"><div class="lab">Rétroactions</div><div class="val">Pas de rétroaction évaluative à cette étape. Chaque démarche produit une réponse de l'interlocuteur, et une mention « Ajouté au dossier » ou « Rien de nouveau au dossier ».</div></div>
+    <div class="row"><div class="lab">Actions et embranchements</div><div class="val">
+      <ul>
+        <li><strong>Gestionnaire — courriel</strong> : déclaration de copropriété + police du syndicat. <strong>Téléphone</strong> : donne la cause et renvoie à la présidente pour l'annexe.</li>
+        <li><strong>Présidente — courriel</strong> : annexe décrivant l'unité standard de base. <strong>Téléphone</strong> : parle franchise et primes, sans donner le montant.</li>
+        <li><strong>Entrepreneur — courriel</strong> : rapport d'intervention + estimation des travaux + facture du plombier. <strong>Téléphone</strong> : verdict de terrain, sans chiffres.</li>
+        <li><strong>Copropriétaire — courriel</strong> : sa police, avec l'avenant sur les améliorations. <strong>Téléphone</strong> : sa version des faits.</li>
+        <li><strong>Courtier — courriel</strong> : copie de la police du syndicat (chemin de rechange). <strong>Téléphone</strong> : rappelle le principe, refuse de citer la franchise de mémoire.</li>
+        <li><strong>Voisin du 202 — téléphone</strong> seulement : confirme que le plafond est d'origine.</li>
+      </ul>
+      <p>Chaque démarche ne se fait qu'une fois. Bouton « Passer à la décision » actif en tout temps → écran 03. Chemin minimal : trois courriels (gestionnaire, présidente, entrepreneur).</p></div></div>
+  </div>
+</div>
+
+<div class="ecran">
+  <div class="ecran-head"><span class="no">Écran 02b</span><span class="titre">Lecture d'un document</span><span class="type">fenêtre superposée</span></div>
+  <div class="rows">
+    <div class="row"><div class="lab">Visuel</div><div class="val">Fenêtre superposée, titre du document, corps défilant, bouton Fermer. Mise en page d'un extrait officiel : intitulés d'articles en petites capitales, texte suivi, tableau pour l'estimation.</div></div>
+    <div class="row"><div class="lab">Texte à l'écran</div><div class="val"><ul>
+      <li><strong>Déclaration de copropriété</strong> : article 41, parties communes, dont les colonnes qui desservent plus d'une fraction ; article 42, qui renvoie à une annexe distincte ; article 43, les améliorations restent à la charge du copropriétaire.</li>
+      <li><strong>Description de l'unité standard de base</strong> : annexe C adoptée à l'assemblée du 12 juin 2019, six éléments énumérés, dont le tapis de nylon ou le vinyle au sol et les armoires de mélamine blanche.</li>
+      <li><strong>Police du syndicat</strong> : biens assurés, exclusion des améliorations, franchise, montant variable selon la partie.</li>
+      <li><strong>Police de la copropriétaire</strong> : avenant améliorations 30 000 $, biens meubles 60 000 $, franchise 1 000 $.</li>
+      <li><strong>Rapport d'intervention</strong> : cause, catégorie d'eau, inventaire des dommages par unité.</li>
+      <li><strong>Estimation des travaux</strong> : six postes, total de 34 600 $, sans répartition.</li>
+      <li><strong>Facture du plombier</strong> : intervention d'urgence, 1 340 $, raccord d'origine.</li>
+    </ul></div></div>
+    <div class="row"><div class="lab">Narration</div><div class="val">Aucune. La lecture est silencieuse, comme au dossier.</div></div>
+    <div class="row"><div class="lab">Rétroactions</div><div class="val">Aucune.</div></div>
+    <div class="row"><div class="lab">Actions et embranchements</div><div class="val">Les documents restent accessibles à l'écran 03, pendant la décision. Le texte de la police est généré avec la valeur de <code>franchise</code> tirée au début de la partie.</div></div>
+  </div>
+</div>
+
+<div class="ecran">
+  <div class="ecran-head"><span class="no">Écran 03</span><span class="titre">Répartition et franchise</span><span class="type">glisser-déposer + choix</span></div>
+  <div class="rows">
+    <div class="row"><div class="lab">Visuel</div><div class="val">Cinq étiquettes à répartir dans deux colonnes : assurance du syndicat, assurance de la copropriétaire. La liste des documents reste visible à droite. Sous le tri, deux questions à choix.</div></div>
+    <div class="row"><div class="lab">Texte à l'écran</div><div class="val"><p>Éléments à répartir : le raccord et la colonne d'alimentation ; les armoires de mélamine du 302 ; le plafond de gypse du 202 ; le plancher de bois franc du 302 ; le mobilier du salon.</p><p>Question 1 : quel est le montant de la franchise de la police du syndicat ? Quatre choix, de 10 000 à 25 000 $. Question 2 : la part assurée par le syndicat dépasse-t-elle cette franchise ? Deux choix.</p></div></div>
+    <div class="row"><div class="lab">Narration</div><div class="val"><p class="audio">NAR_03.mp3</p><p>« Répartissez maintenant les dommages, puis dites-moi si le syndicat a intérêt à réclamer. »</p></div></div>
+    <div class="row"><div class="lab">Rétroactions</div><div class="val">Aucune à cette étape : la validation est différée pour éviter la réponse par tâtonnement.</div></div>
+    <div class="row"><div class="lab">Actions et embranchements</div><div class="val">Glisser-déposer, ou sélection de l'étiquette puis de la colonne, pour le tactile et le clavier. Bouton « Valider mes réponses » inactif tant que les cinq étiquettes ne sont pas placées et les deux questions répondues → écran 04.</div></div>
+  </div>
+</div>
+
+<div class="ecran">
+  <div class="ecran-head"><span class="no">Écran 04</span><span class="titre">Rétroaction et débreffage</span><span class="type">assemblé selon le parcours</span></div>
+  <div class="rows">
+    <div class="row"><div class="lab">Visuel</div><div class="val">Ligne de résultats en chiffres, puis un bloc par élément, vert ou rouge, puis les notes de débreffage en encadrés.</div></div>
+    <div class="row"><div class="lab">Texte à l'écran</div><div class="val"><p>Résultats : éléments bien classés sur cinq · franchise exacte ou non · dépassement exact ou non · nombre de démarches pour un minimum requis de trois.</p></div></div>
+    <div class="row"><div class="lab">Narration</div><div class="val"><p class="audio">NAR_04.mp3</p><p>« Voyons votre dossier. »</p></div></div>
+    <div class="row"><div class="lab">Rétroaction positive</div><div class="val"><ul>
+      <li>Colonne : « La colonne dessert plusieurs fractions : c'est une partie commune (article 41). »</li>
+      <li>Armoires : « L'annexe place les armoires de mélamine blanche dans l'unité standard de base. »</li>
+      <li>Plafond du 202 : « Du gypse peint d'origine. Que l'eau vienne d'une autre unité ne change rien. »</li>
+      <li>Plancher : « L'annexe prévoit du tapis ou du vinyle : le bois franc est une amélioration (article 43). »</li>
+      <li>Mobilier : « Les biens meubles n'ont jamais fait partie de l'immeuble. »</li>
+    </ul></div></div>
+    <div class="row"><div class="lab">Rétroaction négative</div><div class="val">Même explication, précédée de la réponse donnée et de la bonne réponse. Aucune formulation qui juge la personne.</div></div>
+    <div class="row"><div class="lab">Actions et embranchements</div><div class="val">
+      <p>Notes de débreffage affichées selon des conditions, et non toutes ensemble :</p>
+      <ul>
+        <li>annexe absente du dossier → « vous avez tranché sans le seul document qui dit si le bois franc est une amélioration » ;</li>
+        <li>déclaration absente → rien n'établit que la colonne est une partie commune ;</li>
+        <li>police du syndicat absente → la franchise ne pouvait qu'être devinée ;</li>
+        <li>estimation absente → la comparaison avec la franchise ne repose sur aucun chiffre ;</li>
+        <li>rapport absent → la cause n'est pas établie par écrit ;</li>
+        <li>trois démarches ou moins et aucune erreur → parcours optimal nommé explicitement ;</li>
+        <li>plus de six démarches → coût réel des démarches inutiles pour l'assuré.</li>
+      </ul>
+      <p>Note toujours affichée : la franchise reste à la charge du syndicat et ne se facture pas à la copropriétaire, même quand ses améliorations sont en cause. Bouton « Recommencer » : remise à zéro et nouveau tirage de la franchise.</p></div></div>
+  </div>
+</div>
+
+<h2>Réponses attendues</h2>
+<div class="card">
+  <div class="rows">
+    <div class="row"><div class="lab">Assurance du syndicat</div><div class="val">Raccord et colonne · armoires de mélamine du 302 · plafond de gypse du 202. Part correspondante : 19 500 $, soit plomberie et mur 4 200 $, armoires 6 800 $, plafond 3 100 $, assèchement 5 400 $.</div></div>
+    <div class="row"><div class="lab">Assurance de la copropriétaire</div><div class="val">Plancher de bois franc 11 200 $ · mobilier 3 900 $. Total de 15 100 $, exclu du calcul de la franchise du syndicat.</div></div>
+    <div class="row"><div class="lab">Franchise</div><div class="val">Valeur tirée au hasard. Avec une part de 19 500 $ : réclamation justifiée à 10 000 et 15 000 $, réclamation inutile à 20 000 et 25 000 $.</div></div>
+  </div>
+</div>
+
+<div class="note">Le piège central du scénario : la déclaration de copropriété ne suffit pas. Elle renvoie à une annexe adoptée en assemblée, que seule la présidente détient. Un apprenant pressé conclut que le plancher est couvert par le syndicat, parce que la déclaration ne dit nulle part le contraire.</div>
+
+<footer>
+  Scénarimage rédigé par Thierry De Gagné, septembre 2026, pour son portfolio. Le gabarit reprend la logique des scénarimages de production qu'il a utilisés en entreprise : un bloc par écran, texte à l'écran, narration avec noms de fichiers audio, rétroactions séparées, et une colonne d'actions et d'embranchements pour l'équipe d'intégration.
+</footer>
+</div>
+
+</body>
+</html>

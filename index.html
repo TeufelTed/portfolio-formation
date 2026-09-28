@@ -1,0 +1,161 @@
+<title>Portfolio Thierry De Gagné</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#e8ecf0; --surface:#ffffff; --surface-2:#f3f6f8; --line:#ccd6dd;
+    --ink:#101a24; --ink-2:#48586a; --ink-3:#6d7d8d;
+    --accent:#1a6480; --accent-soft:#dceaf1;
+    --warn:#8a6100; --warn-soft:#f5ead0;
+    --shadow:0 1px 2px rgba(16,26,36,.08), 0 8px 24px rgba(16,26,36,.06);
+    --serif:"IBM Plex Serif",Georgia,serif;
+    --sans:"IBM Plex Sans",-apple-system,Segoe UI,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --ground:#0d151c; --surface:#151f28; --surface-2:#1b262f; --line:#2c3a45;
+      --ink:#e9eef2; --ink-2:#a7b6c2; --ink-3:#8496a3;
+      --accent:#6fb6d2; --accent-soft:#1d3440;
+      --warn:#dfb75f; --warn-soft:#332a14;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --ground:#0d151c; --surface:#151f28; --surface-2:#1b262f; --line:#2c3a45;
+    --ink:#e9eef2; --ink-2:#a7b6c2; --ink-3:#8496a3;
+    --accent:#6fb6d2; --accent-soft:#1d3440;
+    --warn:#dfb75f; --warn-soft:#332a14;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.6;padding:0 16px;padding-block:0 52px}
+  .wrap{max-width:860px;margin:0 auto}
+  header{padding-block:34px 20px;border-bottom:2px solid var(--accent);margin-bottom:8px}
+  .kicker{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent)}
+  h1{font-family:var(--serif);font-size:clamp(28px,5.4vw,42px);font-weight:600;margin:8px 0 6px;letter-spacing:-.02em;text-wrap:balance}
+  .sub{font-family:var(--serif);font-size:18px;color:var(--ink-2);max-width:60ch;margin:0 0 14px}
+  .coord{font-family:var(--mono);font-size:13px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:6px 16px}
+  p{margin:0 0 14px;max-width:68ch}
+  h2{font-family:var(--serif);font-size:25px;font-weight:600;margin:0 0 4px;text-wrap:balance}
+  h3{font-family:var(--sans);font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-3);margin:22px 0 8px}
+  section.piece{background:var(--surface);border:1px solid var(--line);border-radius:5px;box-shadow:var(--shadow);padding:26px 26px 24px;margin:26px 0}
+  .piece-no{font-family:var(--mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+  .lede{font-family:var(--serif);font-size:17.5px;line-height:1.6;color:var(--ink)}
+  .cta{display:inline-block;background:var(--accent);color:#fff;border-radius:3px;padding:10px 18px;text-decoration:none;font-weight:500;margin:6px 0 4px}
+  :root[data-theme="dark"] .cta,:root:not([data-theme="light"]) .cta{color:#08141a}
+  @media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .cta{color:#fff}}
+  .cta:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .fiche{display:grid;grid-template-columns:150px 1fr;border:1px solid var(--line);border-radius:4px;overflow:hidden;margin:14px 0 6px}
+  .fiche > div{padding:10px 14px;border-bottom:1px solid var(--line)}
+  .fiche > div:nth-child(odd){background:var(--surface-2);font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3)}
+  .fiche > div:nth-last-child(-n+2){border-bottom:none}
+  @media (max-width:600px){
+    .fiche{grid-template-columns:1fr}
+    .fiche > div{border-bottom:none}
+    .fiche > div:nth-child(even){border-bottom:1px solid var(--line);padding-top:0}
+  }
+  ul{margin:0 0 14px;padding-left:20px;max-width:68ch}
+  li{margin-bottom:6px}
+  figure{margin:16px 0 8px}
+  figure img{width:100%;max-width:100%;border:1px solid var(--line);border-radius:4px;display:block}
+  figcaption{font-size:13.5px;color:var(--ink-3);margin-top:7px;max-width:68ch}
+  .note{background:var(--warn-soft);border:1px solid var(--warn);border-radius:4px;padding:14px 16px;font-size:14px;margin:20px 0;max-width:68ch}
+  footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink-3);max-width:68ch}
+  a{color:var(--accent)}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="kicker">Portfolio · conception et intégration e-learning</div>
+  <h1>Thierry De Gagné</h1>
+  <p class="sub">Concepteur pédagogique et intégrateur e-learning. Plus de 25 ans en formation, dont six ans auprès des experts en sinistre d'un grand assureur de dommages.</p>
+  <div class="coord"><span>tdegagne@gmail.com</span><span>514-812-6432</span><span>linkedin.com/in/tdegagne</span></div>
+</header>
+
+<div class="note">Les formations que j'ai conçues chez mes employeurs leur appartiennent et ne peuvent pas être diffusées. Les pièces ci-dessous ont donc été créées pour ce portfolio, sur des cas fictifs, avec les mêmes méthodes de travail.</div>
+
+<section class="piece">
+  <div class="piece-no">Pièce 1 · module interactif</div>
+  <h2>Sinistre au Mérisier</h2>
+  <p class="lede">Une mise en situation jouable, où l'apprenant mène une enquête avant de trancher. Un dégât d'eau en copropriété : qui paie quoi, et le syndicat a-t-il intérêt à réclamer ?</p>
+  <p><a class="cta" href="module.html">Ouvrir le module</a></p>
+
+  <h3>Le problème à régler</h3>
+  <p>Les experts en sinistre connaissent la théorie de la copropriété, mais tranchent souvent trop tôt, avant d'avoir obtenu les documents qui portent la réponse. Une formation qui explique la règle ne corrige pas ça. Une formation qui les met en position de décider avec un dossier incomplet, oui.</p>
+
+  <h3>Les mécaniques</h3>
+  <ul>
+    <li><strong>Enquête à démarches libres.</strong> Six interlocuteurs, joignables par téléphone ou par courriel. Le téléphone répond tout de suite mais ne donne rien d'écrit ; le courriel rapporte les documents, mais coûte une journée.</li>
+    <li><strong>Dossier vivant.</strong> Les réponses s'empilent dans un fil, et les documents obtenus deviennent consultables : déclaration de copropriété, annexe décrivant l'unité standard de base, polices d'assurance, rapport d'intervention, estimation des travaux.</li>
+    <li><strong>Décision par glisser-déposer</strong>, puis deux questions sur la franchise. Le montant de la franchise change à chaque partie : impossible d'y répondre sans avoir lu la police.</li>
+    <li><strong>Débreffage assemblé selon le parcours.</strong> Aucune rétroaction ne révèle une information que l'apprenant n'a pas demandée. Ses démarches sont comptées et comparées au minimum requis.</li>
+  </ul>
+
+  <h3>Fiche de conception</h3>
+  <div class="fiche">
+    <div>Public</div><div>Experts en sinistre, dommages matériels</div>
+    <div>Objectifs</div><div>Choisir ses interlocuteurs ; distinguer parties communes, unité standard de base et améliorations ; répartir les dommages ; déterminer si la part du syndicat dépasse sa franchise</div>
+    <div>Durée</div><div>12 à 18 minutes selon le nombre de démarches</div>
+    <div>Stratégie</div><div>Apprentissage par l'enquête et la décision, avec rétroaction différée pour éviter la réponse par tâtonnement</div>
+    <div>Production</div><div>HTML et JavaScript, générés en vibe coding avec un agent de codage IA ; aucune dépendance, fonctionne sur téléphone</div>
+    <div>Variante</div><div>Franchise tirée au hasard à chaque tentative, ce qui rend le module rejouable et empêche la transmission de la réponse entre collègues</div>
+  </div>
+</section>
+
+<section class="piece">
+  <div class="piece-no">Pièce 2 · document de production</div>
+  <h2>Le scénarimage derrière le module</h2>
+  <p class="lede">Ce que je remets à une équipe d'intégration : un bloc par écran, le texte à l'écran, la narration avec les noms de fichiers audio, les rétroactions positives et négatives séparées, et la colonne des actions et des embranchements.</p>
+  <p><a class="cta" href="scenarimage.html">Lire le scénarimage</a></p>
+  <p>On y trouve aussi les directives générales — menu, structure, personnages, lexique, variables — et le tableau des réponses attendues avec les montants. C'est le document qui permet à quelqu'un d'autre que moi de produire le module.</p>
+</section>
+
+<section class="piece">
+  <div class="piece-no">Pièce 3 · outils de terrain</div>
+  <h2>Des outils conçus avec l'IA, utilisés au quotidien</h2>
+  <p class="lede">Dans mon poste actuel, j'ai conçu et déployé, avec des agents de codage IA, des applications web que mon équipe utilise sur son téléphone. En voici trois, choisies parce que leur structure est celle d'un dispositif de formation.</p>
+
+  <h3>Le suivi de maintenance</h3>
+  <figure>
+    <img src="img/griffin-semaine.jpg" alt="Vue Semaine : compteur de tâches faites, heures travaillées, tâches groupées par zone avec boutons Fait, Reporté et N/A.">
+    <figcaption>Chaque tâche porte sa fréquence et trois verdicts : Fait, Reporté, N/A. Le bloc d'heures se règle au pouce, et le compteur de tâches faites donne l'avancement en un coup d'œil.</figcaption>
+  </figure>
+  <figure>
+    <img src="img/griffin-note-photo.jpg" alt="Tâche marquée Fait, avec la date et l'auteur, un champ Notes doté d'un bouton de dictée, un bouton Photo et la vignette de la photo versée.">
+    <figcaption>La preuve du travail accompli : une note qu'on peut dicter plutôt qu'écrire, et une photo prise sur place. La date et l'auteur s'inscrivent d'eux-mêmes.</figcaption>
+  </figure>
+
+  <h3>La grille d'inspection et son rapport</h3>
+  <figure>
+    <img src="img/inspection-grille.jpg" alt="Grille d'inspection : navigation par zone avec avancement chiffré, critères Oui ou Non, note dictable et jusqu'à six photos légendées.">
+    <figcaption>La grille : 262 éléments répartis par zone, chacune avec son avancement chiffré. Un « Non » fait basculer la ligne et ouvre la saisie — note dictable, jusqu'à six photos, chacune avec sa légende.</figcaption>
+  </figure>
+  <figure>
+    <img src="img/inspection-rapport.jpg" alt="Rapport d'inspection : bandeau de synthèse, liste des points à corriger, puis tableau détaillé par zone.">
+    <figcaption>Le rapport produit par l'outil. Bandeau de synthèse, puis les sept points à corriger en tête, chacun avec son chemin complet et le nombre de photos qui l'appuient. Le détail vient après.</figcaption>
+  </figure>
+  <figure>
+    <img src="img/inspection-detail.jpg" alt="Détail du rapport : tableau par critère avec résultat en vert ou en rouge, et photos de preuve rattachées aux non-conformités.">
+    <figcaption>Dans le détail, la preuve reste collée au constat : les photos accompagnent la ligne en écart, pas une annexe en fin de document.</figcaption>
+  </figure>
+
+  <h3>La boucle des réunions</h3>
+  <figure>
+    <img src="img/reunions-flux.jpg" alt="Outil de gestion des réunions : quatre étapes — Collecte, Ordre du jour, Procès-verbal, Suivi — puis des dossiers classés par catégorie et par statut.">
+    <figcaption>Un troisième outil, montré ici sans son contenu : quatre étapes qui se suivent — collecte des sujets, ordre du jour, procès-verbal, puis liste de suivi. Chaque décision prise en réunion devient un dossier daté qui reste ouvert jusqu'à sa clôture.</figcaption>
+  </figure>
+  <p>C'est le même problème qu'un plan d'action après une formation : les engagements pris ensemble finissent dans un document que personne ne rouvre. Ici, le procès-verbal alimente directement la liste de suivi, et le suivi revient à l'ordre du jour de la rencontre suivante.</p>
+
+  <h3>Ce que ça vaut en formation</h3>
+  <p>Ces deux outils ont la même ossature qu'un dispositif d'observation des compétences : un critère observable, un verdict, une trace. La grille d'inspection va plus loin — elle produit son rapport, et ce rapport commence par les écarts plutôt que par la liste complète. C'est exactement ce qu'on attend d'un rapport d'observation après une formation : la personne qui le reçoit sait quoi faire en dix secondes.</p>
+  <p>La dictée n'est pas un gadget : c'est ce qui permet de documenter avec des gants, sur une échelle ou dans un sous-sol inondé. La photo légendée remplace le rapport qu'on n'écrira jamais le soir venu. Et l'avancement par zone joue le rôle d'une barre de progression dans un parcours d'apprentissage.</p>
+  <p>J'ai mené chacun de ces outils de l'analyse du besoin jusqu'à l'adoption par un utilisateur non technique. C'est de l'ingénierie de la performance, appliquée à ma propre équipe.</p>
+  <p class="note" style="margin-top:18px">Captures d'une application réelle en service. Les noms, le numéro d'immeuble et les données identifiantes ont été remplacés.</p>
+</section>
+
+<footer>
+  Portfolio préparé en septembre 2026. Le module et le scénarimage ont été conçus et écrits par Thierry De Gagné ; l'intégration a été produite en vibe coding avec un agent de codage IA, selon la même méthode que les outils présentés à la pièce 3.
+</footer>
+</div>
