@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Le module en deux langues</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#e8ecf0; --surface:#ffffff; --surface-2:#f3f6f8; --line:#ccd6dd;
+    --ink:#101a24; --ink-2:#48586a; --ink-3:#6d7d8d;
+    --accent:#1a6480; --accent-soft:#dceaf1;
+    --warn:#8a6100; --warn-soft:#f5ead0;
+    --shadow:0 1px 2px rgba(16,26,36,.08), 0 8px 24px rgba(16,26,36,.06);
+    --serif:"IBM Plex Serif",Georgia,serif;
+    --sans:"IBM Plex Sans",-apple-system,Segoe UI,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --ground:#0d151c; --surface:#151f28; --surface-2:#1b262f; --line:#2c3a45;
+      --ink:#e9eef2; --ink-2:#a7b6c2; --ink-3:#8496a3;
+      --accent:#6fb6d2; --accent-soft:#1d3440;
+      --warn:#dfb75f; --warn-soft:#332a14;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --ground:#0d151c; --surface:#151f28; --surface-2:#1b262f; --line:#2c3a45;
+    --ink:#e9eef2; --ink-2:#a7b6c2; --ink-3:#8496a3;
+    --accent:#6fb6d2; --accent-soft:#1d3440;
+    --warn:#dfb75f; --warn-soft:#332a14;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;padding:0 16px;padding-block:0 48px}
+  .wrap{max-width:980px;margin:0 auto}
+  header{border-bottom:1px solid var(--line);padding-block:26px 18px;margin-bottom:24px}
+  .kicker{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--accent)}
+  h1{font-family:var(--serif);font-size:clamp(24px,4.4vw,34px);font-weight:600;margin:8px 0 10px;letter-spacing:-.01em;text-wrap:balance}
+  p{margin:0 0 12px;max-width:68ch}
+  h2{font-family:var(--serif);font-size:21px;font-weight:600;margin:30px 0 12px}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:4px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px}
+  .pair > div{padding:18px 20px}
+  .pair > div:first-child{border-right:1px solid var(--line)}
+  @media (max-width:720px){
+    .pair{grid-template-columns:1fr}
+    .pair > div:first-child{border-right:none;border-bottom:1px solid var(--line)}
+  }
+  .lang{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-3);margin-bottom:8px}
+  .pair p:last-child{margin-bottom:0}
+  .pair ul{margin:0;padding-left:20px}
+  .pair li{margin-bottom:6px}
+  .pair li:last-child{margin-bottom:0}
+  .tbl{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:4px;overflow:hidden;box-shadow:var(--shadow);font-size:14.5px}
+  .tbl th,.tbl td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .tbl th{background:var(--surface-2);font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-3);font-weight:600}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl td:first-child{font-weight:500;white-space:nowrap}
+  .tbl td:nth-child(2){font-family:var(--mono);font-size:13.5px;color:var(--accent);white-space:nowrap}
+  .scroll{overflow-x:auto}
+  .note{background:var(--warn-soft);border:1px solid var(--warn);border-radius:4px;padding:13px 16px;font-size:14px;margin:18px 0;max-width:68ch}
+  footer{margin-top:32px;padding-top:15px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink-3);max-width:68ch}
+  a{color:var(--accent)}
+
+  .retour{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;background:var(--surface)}
+  .retour:hover{border-color:var(--accent);background:var(--accent-soft)}
+  .retour:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .retour-bas{margin-top:22px;display:flex;justify-content:center}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header>
+  <div class="kicker">Portfolio · pièce 3 · bilinguisme</div>
+  <h1>Le module en deux langues</h1>
+  <p>Le même module, en français et en anglais, côte à côte : la mise en situation, les objectifs et deux rétroactions. Suit le relevé des choix de terminologie, parce que c'est là que se joue la révision d'une traduction en assurance.</p>
+  <p style="margin-top:14px"><a class="retour" href="index.html">← Portfolio</a> <a class="retour" href="module.html">Ouvrir le module</a></p>
+</header>
+
+<h2>Mise en situation</h2>
+<div class="pair">
+  <div>
+    <div class="lang">Français</div>
+    <p>Un raccord a cédé sur une colonne d'alimentation en eau, dans le mur mitoyen du 302 de l'immeuble Le Mérisier. L'eau a coulé une partie de la nuit. Le plancher de bois franc du 302 gonfle, le bas des armoires de cuisine est gorgé d'eau, et le plafond du 202, juste en dessous, est taché sur deux mètres.</p>
+    <p>La copropriétaire du 302 vous appelle : elle veut savoir qui paie son plancher, posé il y a deux ans. Le gestionnaire de l'immeuble vous écrit de son côté. Vous n'avez encore aucun document au dossier.</p>
+  </div>
+  <div>
+    <div class="lang">English</div>
+    <p>A fitting failed on a water supply riser inside the party wall of unit 302, at Le Mérisier. The water ran for part of the night. The hardwood floor in 302 is swelling, the lower kitchen cabinets are soaked, and the ceiling of unit 202, directly below, is stained over two metres.</p>
+    <p>The co-owner of 302 calls you: she wants to know who pays for her floor, installed two years ago. The property manager emails you separately. So far, you have no documents on file.</p>
+  </div>
+</div>
+
+<h2>Objectifs d'apprentissage</h2>
+<div class="pair">
+  <div>
+    <div class="lang">Français</div>
+    <p>Au terme de cette mise en situation, vous serez en mesure de :</p>
+    <ul>
+      <li>choisir les interlocuteurs à joindre et l'ordre dans lequel les joindre ;</li>
+      <li>distinguer les parties communes, l'unité standard de base et les améliorations, à partir des documents du syndicat ;</li>
+      <li>répartir les dommages entre l'assurance du syndicat et celle de la copropriétaire ;</li>
+      <li>déterminer si la part assurée par le syndicat dépasse sa franchise.</li>
+    </ul>
+  </div>
+  <div>
+    <div class="lang">English</div>
+    <p>By the end of this scenario, you will be able to:</p>
+    <ul>
+      <li>choose whom to contact, and in what order;</li>
+      <li>tell common portions, the standard unit and betterments apart, using the syndicate's own documents;</li>
+      <li>allocate the damage between the syndicate's insurance and the co-owner's;</li>
+      <li>determine whether the syndicate's share exceeds its deductible.</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Rétroaction — le plancher de bois franc</h2>
+<div class="pair">
+  <div>
+    <div class="lang">Français</div>
+    <p>L'annexe adoptée en assemblée prévoit du tapis ou du vinyle au sol. Le bois franc est donc une amélioration au sens de l'article 43, et il reste à la charge de la copropriétaire, même si le sinistre vient des parties communes.</p>
+  </div>
+  <div>
+    <div class="lang">English</div>
+    <p>The schedule adopted by the general meeting provides for carpet or vinyl flooring. The hardwood is therefore a betterment under section 43, and it remains the co-owner's responsibility, even though the loss originated in the common portions.</p>
+  </div>
+</div>
+
+<h2>Rétroaction — la franchise</h2>
+<div class="pair">
+  <div>
+    <div class="lang">Français</div>
+    <p>La part assurée par le syndicat totalise 19 500 $. Comparez-la à la franchise inscrite aux conditions particulières, et à elle seule : les 15 100 $ qui relèvent de la police de la copropriétaire n'entrent pas dans ce calcul. Une réclamation sous la franchise ne paie rien et marque le dossier du syndicat.</p>
+  </div>
+  <div>
+    <div class="lang">English</div>
+    <p>The syndicate's insured share totals $19,500. Compare it with the deductible stated in the declarations page, and with that figure alone: the $15,100 covered by the co-owner's policy does not belong in this calculation. A claim below the deductible pays nothing and still marks the syndicate's loss history.</p>
+  </div>
+</div>
+
+<h2>Choix de terminologie</h2>
+<p>Les pièges de cette traduction ne sont pas grammaticaux : ce sont des termes d'assurance et de droit de la copropriété qui ont un équivalent consacré, et un ou deux faux amis qui passent inaperçus.</p>
+<div class="scroll">
+<table class="tbl">
+  <tr><th>Français</th><th>Retenu</th><th>Pourquoi, et ce qu'il faut éviter</th></tr>
+  <tr><td>franchise</td><td>deductible</td><td>Le faux ami le plus coûteux. « Franchise » existe en anglais, mais désigne une concession commerciale. Un texte qui garde <em>franchise</em> perd tout son sens.</td></tr>
+  <tr><td>amélioration</td><td>betterment</td><td>En assurance, <em>betterment</em> est le terme du métier. <em>Improvement</em> se comprend, mais n'a pas la portée contractuelle attendue dans un texte de couverture.</td></tr>
+  <tr><td>unité standard de base</td><td>standard unit</td><td>Le terme que reprennent les déclarations de copropriété québécoises rédigées en anglais. <em>Basic unit</em> serait une traduction littérale sans valeur juridique.</td></tr>
+  <tr><td>syndicat des copropriétaires</td><td>syndicate of co-owners</td><td>Notion du Code civil du Québec. Le réflexe nord-américain, <em>condo association</em>, renvoie à un cadre juridique différent.</td></tr>
+  <tr><td>parties communes</td><td>common portions</td><td>Formulation du Code civil. <em>Common areas</em> évoque des espaces physiques et laisse échapper les canalisations qui traversent une partie privative.</td></tr>
+  <tr><td>expert en sinistre</td><td>claims adjuster</td><td>Titre professionnel reconnu. <em>Claims expert</em> n'existe pas dans l'usage du métier.</td></tr>
+  <tr><td>sinistre</td><td>loss · claim</td><td>Deux mots pour un seul : <em>loss</em> pour l'événement, <em>claim</em> pour la réclamation qui en découle. Le français les confond, l'anglais non.</td></tr>
+  <tr><td>conditions particulières</td><td>declarations page</td><td>Terme consacré des polices nord-américaines. <em>Particular conditions</em> est un calque qui sonne traduit.</td></tr>
+</table>
+</div>
+
+<div class="note">Cette page est une traduction de mon propre contenu, faite pour ce portfolio. Dans un mandat réel, je remets ce même relevé de termes avec la traduction : c'est ce qui permet à l'équipe de trancher une fois pour toutes, puis de garder le vocabulaire constant d'un module à l'autre.</div>
+
+<footer>
+  Thierry De Gagné, septembre 2026. Conception, rédaction et traduction. Cas fictif.
+</footer>
+<div class="retour-bas"><a class="retour" href="index.html">← Portfolio</a></div>
+</div>
+
+</body>
+</html>

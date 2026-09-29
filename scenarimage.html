@@ -68,9 +68,11 @@
   .note{background:var(--warn-soft);border:1px solid var(--warn);border-radius:3px;padding:12px 14px;font-size:14px;margin:16px 0}
   code{font-family:var(--mono);font-size:13px;background:var(--surface-2);border:1px solid var(--line);border-radius:2px;padding:1px 5px}
   footer{margin-top:32px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3);max-width:70ch}
-  .retour{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);text-decoration:none;margin-bottom:4px}
-  .retour:hover{text-decoration:underline}
+
+  .retour{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;background:var(--surface)}
+  .retour:hover{border-color:var(--accent);background:var(--accent-soft)}
   .retour:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .retour-bas{margin-top:22px;display:flex;justify-content:center}
 </style>
 </head>
 <body>
@@ -78,7 +80,7 @@
 
 <div class="wrap">
 <header>
-  <a class="retour" href="index.html">← Portfolio</a>
+  <div style="margin-bottom:12px"><a class="retour" href="index.html">← Portfolio</a></div>
   <div class="kicker">Scénarimage · version 1.0 · septembre 2026</div>
   <h1>Sinistre au Mérisier</h1>
   <p>Scénarimage de production du module interactif « Sinistre au Mérisier ». Gabarit et contenu de Thierry De Gagné. Le cas, les personnes, les documents et les montants sont fictifs.</p>
@@ -215,6 +217,7 @@
 <footer>
   Scénarimage rédigé par Thierry De Gagné, septembre 2026, pour son portfolio. Le gabarit reprend la logique des scénarimages de production qu'il a utilisés en entreprise : un bloc par écran, texte à l'écran, narration avec noms de fichiers audio, rétroactions séparées, et une colonne d'actions et d'embranchements pour l'équipe d'intégration.
 </footer>
+<div class="retour-bas"><a class="retour" href="index.html">← Portfolio</a></div>
 </div>
 
 </body>
