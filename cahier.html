@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cahier de développement</title>
+<meta name="description" content="Démonstration d'un cahier de développement des compétences : auto-évaluation, validation par le mentor, carte de chaleur et vue de cohorte. Données fictives.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    color-scheme: light;
+    --ground:#e8ecf0; --surface:#ffffff; --surface-2:#f3f6f8; --line:#ccd6dd;
+    --ink:#101a24; --ink-2:#48586a; --ink-3:#5f6f7f;
+    --accent:#1a6480; --accent-soft:#dceaf1;
+    --warn:#8a6100; --warn-soft:#f5ead0;
+    --ok:#2a6b3c; --ok-soft:#dcefe1;
+    --bad:#a3322a; --bad-soft:#f6e0dd;
+    --h0:#f3f6f8; --h0t:#48586a;
+    --h1:#dceaf1; --h1t:#101a24;
+    --h2:#9fc7da; --h2t:#101a24;
+    --h3:#2f7c9c; --h3t:#ffffff;
+    --h4:#164f66; --h4t:#ffffff;
+    --shadow:0 1px 2px rgba(16,26,36,.08), 0 8px 24px rgba(16,26,36,.06);
+    --serif:"IBM Plex Serif",Georgia,serif;
+    --sans:"IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --ground:#0d151c; --surface:#151f28; --surface-2:#1b262f; --line:#2c3a45;
+      --ink:#e9eef2; --ink-2:#a7b6c2; --ink-3:#8fa0ad;
+      --accent:#6fb6d2; --accent-soft:#1d3440;
+      --warn:#dfb75f; --warn-soft:#332a14;
+      --ok:#7cc58f; --ok-soft:#173022;
+      --bad:#f09a90; --bad-soft:#3a1d1a;
+      --h0:#1b262f; --h0t:#a7b6c2;
+      --h1:#1f3846; --h1t:#e9eef2;
+      --h2:#2b5a73; --h2t:#e9eef2;
+      --h3:#4b98b8; --h3t:#08141a;
+      --h4:#8fcbe2; --h4t:#08141a;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --ground:#0d151c; --surface:#151f28; --surface-2:#1b262f; --line:#2c3a45;
+    --ink:#e9eef2; --ink-2:#a7b6c2; --ink-3:#8fa0ad;
+    --accent:#6fb6d2; --accent-soft:#1d3440;
+    --warn:#dfb75f; --warn-soft:#332a14;
+    --ok:#7cc58f; --ok-soft:#173022;
+    --bad:#f09a90; --bad-soft:#3a1d1a;
+    --h0:#1b262f; --h0t:#a7b6c2;
+    --h1:#1f3846; --h1t:#e9eef2;
+    --h2:#2b5a73; --h2t:#e9eef2;
+    --h3:#4b98b8; --h3t:#08141a;
+    --h4:#8fcbe2; --h4t:#08141a;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.6;padding:0 16px 52px}
+  .wrap{max-width:960px;margin:0 auto}
+  a{color:var(--accent)}
+  button{font:inherit;color:inherit}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  header{padding-block:22px 18px;border-bottom:2px solid var(--accent);margin-bottom:8px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .retour,.tbtn{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;background:var(--surface);cursor:pointer}
+  .retour:hover,.tbtn:hover{border-color:var(--accent);background:var(--accent-soft)}
+  .kicker{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent)}
+  h1{font-family:var(--serif);font-size:clamp(28px,5.4vw,40px);font-weight:600;margin:8px 0 6px;letter-spacing:-.02em;text-wrap:balance;line-height:1.2}
+  .sub{font-family:var(--serif);font-size:18px;color:var(--ink-2);max-width:62ch;margin:0 0 12px}
+  .intro{font-size:15.5px;max-width:70ch;margin:0 0 6px}
+  .note{background:var(--warn-soft);border:1px solid var(--warn);border-radius:4px;padding:12px 16px;font-size:14px;margin:16px 0;max-width:70ch}
+  p{margin:0 0 12px}
+  h2{font-family:var(--serif);font-size:24px;font-weight:600;margin:0 0 4px;text-wrap:balance;line-height:1.25}
+  h3{font-family:var(--sans);font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-3);margin:0 0 8px}
+
+  /* Barre d'outils et onglets */
+  .tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:18px 0 10px}
+  .tools .spacer{flex:1}
+  .tablist{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:thin;margin-top:6px}
+  .tab{background:none;border:1px solid transparent;border-bottom:none;border-radius:4px 4px 0 0;padding:10px 14px;cursor:pointer;color:var(--ink-2);font-weight:500;white-space:nowrap;position:relative;top:1px}
+  .tab[aria-selected="true"]{background:var(--surface);border-color:var(--line);color:var(--ink);border-bottom:1px solid var(--surface)}
+  .panel{background:var(--surface);border:1px solid var(--line);border-top:none;border-radius:0 0 5px 5px;box-shadow:var(--shadow);padding:22px 22px 24px}
+  @media (max-width:600px){.panel{padding:16px 14px 20px}}
+  .panel-lede{color:var(--ink-2);max-width:70ch}
+
+  /* Sélecteur de capacité */
+  .capnav{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:4px 0 20px}
+  @media (max-width:760px){.capnav{grid-template-columns:1fr 1fr}}
+  .capbtn{text-align:left;background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:10px 12px;cursor:pointer;display:flex;flex-direction:column;gap:4px;min-height:84px}
+  .capbtn[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+  .capbtn .cc{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--accent)}
+  .capbtn .cn{font-size:13.5px;font-weight:500;line-height:1.3}
+  .capbtn .cp{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:auto}
+  .mbar{height:4px;background:var(--line);border-radius:2px;overflow:hidden}
+  .mbar i{display:block;height:100%;background:var(--accent)}
+
+  .caphead{margin-bottom:14px}
+  .axe{font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
+
+  /* Palier */
+  .palier{border:1px solid var(--line);border-radius:5px;margin:0 0 18px;overflow:hidden}
+  .pal-head{background:var(--surface-2);padding:14px 16px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr minmax(220px,300px);gap:14px;align-items:start}
+  @media (max-width:700px){.pal-head{grid-template-columns:1fr}}
+  .pal-name{font-family:var(--serif);font-size:19px;font-weight:600;margin:0}
+  .pal-no{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+  .crit{font-size:13.5px;color:var(--ink-2);margin:4px 0 0}
+  .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .chip{font-size:12px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:2px 10px;color:var(--ink-2)}
+  .chip b{font-weight:600;color:var(--ink)}
+  .bars{display:flex;flex-direction:column;gap:6px;font-size:12.5px}
+  .barrow{display:grid;grid-template-columns:82px 1fr 38px;align-items:center;gap:8px}
+  .barrow .lab{color:var(--ink-3)}
+  .barrow .num{font-family:var(--mono);text-align:right}
+  .bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--ok);transition:width .25s}
+  .bar.auto i{background:var(--ink-3)}
+  .verdict{margin-top:4px;font-size:13px;font-weight:500;padding:6px 10px;border-radius:4px;border:1px solid}
+  .verdict.yes{color:var(--ok);background:var(--ok-soft);border-color:var(--ok)}
+  .verdict.no{color:var(--ink-2);background:var(--surface);border-color:var(--line)}
+
+  /* Comportements */
+  ul.behs{list-style:none;margin:0;padding:0}
+  .beh{border-top:1px solid var(--line);padding:12px 16px}
+  .beh:first-child{border-top:none}
+  .beh-top{display:grid;grid-template-columns:62px 1fr;gap:10px}
+  .code{font-family:var(--mono);font-size:12px;color:var(--ink-3);padding-top:2px}
+  .beh-text{margin:0;font-size:15px;line-height:1.5}
+  .star{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--warn);border:1px solid var(--warn);border-radius:3px;padding:0 5px;margin-left:6px;vertical-align:1px;white-space:nowrap}
+  .beh-ctrl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:10px 0 0 72px}
+  @media (max-width:600px){.beh-top{grid-template-columns:1fr;gap:2px}.beh-ctrl{margin-left:0}}
+  .stg{display:flex;flex-direction:column;gap:3px}
+  .stl{font-size:11px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3)}
+  .pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px 5px 8px;cursor:pointer;font-size:13.5px;min-height:34px;min-width:178px}
+  .pill:hover{border-color:var(--accent)}
+  .pill.s0{color:var(--ink-2)}
+  .pill.s1{color:var(--warn);border-color:var(--warn);background:var(--warn-soft)}
+  .pill.s2{color:var(--ok);border-color:var(--ok);background:var(--ok-soft)}
+  .pill.sn{color:var(--ink-3);border-style:dashed}
+  .dot{width:14px;height:14px;border-radius:50%;border:2px solid currentColor;flex:none;display:inline-block}
+  .s1 .dot,.dot.s1{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+  .s2 .dot,.dot.s2{background:currentColor}
+  .sn .dot,.dot.sn{border-style:dotted}
+  .gap{font-size:12.5px;font-weight:500;border-radius:3px;padding:3px 8px;align-self:flex-end;margin-bottom:5px}
+  .gap.over{color:var(--bad);background:var(--bad-soft)}
+  .gap.under{color:var(--accent);background:var(--accent-soft)}
+  .gap.same{color:var(--ok)}
+  .more{margin-left:auto;align-self:flex-end;background:none;border:1px solid var(--line);border-radius:3px;padding:5px 10px;cursor:pointer;font-size:13px;color:var(--accent)}
+  .more:hover{background:var(--accent-soft)}
+  .more .chev{display:inline-block;transition:transform .15s}
+  .more[aria-expanded="true"] .chev{transform:rotate(90deg)}
+  @media (max-width:600px){.more{margin-left:0}}
+  .pep{margin:12px 0 2px 72px;background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:12px 14px}
+  @media (max-width:600px){.pep{margin-left:0}}
+  .pep ul{list-style:none;margin:0 0 10px;padding:0;display:flex;flex-direction:column;gap:8px}
+  .pep li{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;font-size:14px}
+  .ptype{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;border-radius:3px;padding:2px 7px;background:var(--surface);border:1px solid var(--line);color:var(--ink-2);white-space:nowrap}
+  .pdur{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+  @media (max-width:520px){.pep li{grid-template-columns:1fr auto}.pep li .ptype{grid-column:1 / -1;justify-self:start}}
+  .linkbtn{background:none;border:none;padding:0;color:var(--accent);text-decoration:underline;cursor:pointer;font-size:13.5px}
+
+  /* Carte de chaleur */
+  .switch{display:inline-flex;border:1px solid var(--line);border-radius:4px;overflow:hidden;margin:0 0 14px}
+  .switch button{background:var(--surface);border:none;padding:7px 14px;cursor:pointer;font-size:13.5px;color:var(--ink-2)}
+  .switch button+button{border-left:1px solid var(--line)}
+  .switch button[aria-pressed="true"]{background:var(--accent);color:var(--surface);font-weight:500}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:6px 0 20px}
+  @media (max-width:700px){.kpis{grid-template-columns:1fr 1fr}}
+  .kpi{border:1px solid var(--line);border-radius:4px;padding:10px 12px;background:var(--surface-2)}
+  .kpi .v{font-family:var(--serif);font-size:28px;font-weight:600;line-height:1.1}
+  .kpi .l{font-size:12.5px;color:var(--ink-2)}
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:4px}
+  table.heat{border-collapse:separate;border-spacing:3px;width:100%;min-width:520px;background:var(--surface)}
+  table.heat th{font-size:12.5px;font-weight:600;text-align:left;padding:6px 8px;color:var(--ink-2);vertical-align:bottom}
+  table.heat thead th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3)}
+  table.heat tbody th{min-width:180px;max-width:260px;font-weight:500;color:var(--ink);vertical-align:middle}
+  table.heat tbody th .axe{display:block}
+  table.heat td{padding:0}
+  .cell{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-height:62px;border:none;border-radius:3px;cursor:pointer;padding:6px 4px;font-family:var(--mono);gap:2px}
+  .cell .pc{font-size:17px;font-weight:500}
+  .cell .tag{font-size:10.5px;letter-spacing:.03em;white-space:nowrap}
+  div.cell{cursor:default}
+  .b0{background:var(--h0);color:var(--h0t)} .b1{background:var(--h1);color:var(--h1t)} .b2{background:var(--h2);color:var(--h2t)} .b3{background:var(--h3);color:var(--h3t)} .b4{background:var(--h4);color:var(--h4t)}
+  .w0{background:var(--h0);color:var(--h0t)} .w1{background:var(--warn-soft);color:var(--ink)} .w2{background:var(--bad-soft);color:var(--ink)} .w3{background:var(--bad);color:var(--surface)}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:12.5px;color:var(--ink-2);margin:10px 0 0}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{display:inline-block;width:18px;height:12px;border-radius:2px;border:1px solid var(--line)}
+
+  /* Cohorte */
+  .callout{border-left:4px solid var(--bad);background:var(--bad-soft);padding:12px 16px;border-radius:0 4px 4px 0;margin:0 0 18px;max-width:72ch}
+  .callout.blue{border-left-color:var(--accent);background:var(--accent-soft)}
+  .callout strong{display:block;font-family:var(--serif);font-size:17px;margin-bottom:2px}
+  table.heat.coh tbody th{min-width:150px}
+  table.heat.coh thead th{text-align:center;text-transform:none;font-family:var(--sans);font-size:12.5px;letter-spacing:0;color:var(--ink-2)}
+  tr.hot th{color:var(--bad)}
+  tr.hot th::after{content:" ◆ bloque";font-family:var(--mono);font-size:10.5px;letter-spacing:.04em}
+  .section-gap{margin-top:30px}
+  table.over{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+  table.over th,table.over td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+  table.over thead th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);font-weight:500;background:var(--surface-2)}
+  .marks{display:flex;gap:3px;flex-wrap:nowrap}
+  .mk{width:22px;height:22px;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-family:var(--mono)}
+  .mk.up{background:var(--bad-soft);color:var(--bad);font-weight:600}
+  .mk.eq{background:var(--surface-2);color:var(--ink-3);border:1px solid var(--line)}
+  .mk.dn{background:var(--accent-soft);color:var(--accent)}
+  .count{font-family:var(--mono);font-weight:500;white-space:nowrap}
+
+  /* Journal */
+  .jform{display:grid;gap:12px;max-width:720px;margin-bottom:22px}
+  label.fl{font-size:13px;font-weight:600;color:var(--ink-2);display:block;margin-bottom:4px}
+  select,textarea{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:9px 10px}
+  textarea{min-height:84px;resize:vertical}
+  select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+  .btn{display:inline-block;background:var(--accent);color:var(--surface);border:none;border-radius:3px;padding:10px 18px;font-weight:500;cursor:pointer;justify-self:start}
+  .btn:hover{filter:brightness(1.08)}
+  .jlist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
+  .jentry{border:1px solid var(--line);border-radius:4px;padding:12px 14px;background:var(--surface-2)}
+  .jmeta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-bottom:6px}
+  .jbeh{font-weight:600;margin:0 0 8px;font-size:14.5px}
+  .jentry dl{margin:0;display:grid;gap:6px}
+  .jentry dt{font-size:11.5px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3)}
+  .jentry dd{margin:0 0 4px;white-space:pre-wrap}
+  .empty{color:var(--ink-3);font-style:italic}
+  .err{color:var(--bad);font-size:13.5px;margin:0}
+
+  .storage-warn{display:none}
+  .storage-warn.on{display:block}
+  footer{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink-3);max-width:70ch;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="topbar">
+    <a class="retour" href="index.html">← Portfolio</a>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Changer de thème">Thème : auto</button>
+  </div>
+  <div class="kicker">Pièce 5 · instrument de développement · démonstration</div>
+  <h1>Cahier de développement des compétences</h1>
+  <p class="sub">Programme de rotation menant au poste de directeur de comptes, banque commerciale.</p>
+  <p class="intro">Un cahier de développement rend la progression visible, comportement par comportement. Le participant s'évalue lui-même, puis son mentor valide : l'écart entre les deux devient un sujet de coaching, et chaque comportement renvoie à des pépites d'apprentissage et à des activités ciblées. Agrégés pour toute une cohorte, les mêmes statuts montrent au responsable du programme où le parcours accroche. C'est une démonstration : le programme, les participants et les données sont fictifs, et vos saisies restent dans votre navigateur.</p>
+</header>
+
+<div class="note storage-warn" id="storageWarn" role="status">Le stockage du navigateur est bloqué. La page fonctionne normalement, mais vos saisies seront perdues à la fermeture de l'onglet. Utilisez « Exporter en JSON » pour les garder.</div>
+
+<div class="tools" role="toolbar" aria-label="Actions sur le cahier">
+  <button class="tbtn" type="button" id="exportBtn">Exporter en JSON</button>
+  <button class="tbtn" type="button" id="exampleBtn">Recharger l'exemple</button>
+  <button class="tbtn" type="button" id="resetBtn">Réinitialiser</button>
+  <span class="sr" id="toolMsg" role="status" aria-live="polite"></span>
+</div>
+
+<div class="tablist" role="tablist" aria-label="Vues du cahier">
+  <button class="tab" role="tab" id="tab-cahier" aria-controls="panel-cahier" aria-selected="true">Mon cahier</button>
+  <button class="tab" role="tab" id="tab-heat" aria-controls="panel-heat" aria-selected="false" tabindex="-1">Carte de chaleur</button>
+  <button class="tab" role="tab" id="tab-coh" aria-controls="panel-coh" aria-selected="false" tabindex="-1">Vue cohorte</button>
+  <button class="tab" role="tab" id="tab-jour" aria-controls="panel-jour" aria-selected="false" tabindex="-1">Journal de transfert</button>
+</div>
+
+<section class="panel" role="tabpanel" id="panel-cahier" aria-labelledby="tab-cahier">
+  <p class="panel-lede">Cliquez sur un statut pour le faire changer. <strong>Mon évaluation</strong> : non acquis, partiellement acquis, acquis. <strong>Validé par le mentor</strong> : à valider, puis les trois mêmes statuts. Seuls les statuts validés comptent pour le critère de sortie.</p>
+  <nav class="capnav" id="capnav" aria-label="Capacités"></nav>
+  <div id="capview"></div>
+</section>
+
+<section class="panel" role="tabpanel" id="panel-heat" aria-labelledby="tab-heat" hidden>
+  <p class="panel-lede">La grille agrège vos statuts par capacité et par palier. Un comportement acquis compte pour 1, partiellement acquis pour ½. Cliquez sur une case pour ouvrir le palier.</p>
+  <div class="kpis" id="kpis"></div>
+  <div class="switch" role="group" aria-label="Statuts affichés">
+    <button type="button" data-heat="mentor" aria-pressed="true">Validé par le mentor</button>
+    <button type="button" data-heat="auto" aria-pressed="false">Mon évaluation</button>
+  </div>
+  <div class="scroll"><table class="heat" id="heat"></table></div>
+  <div class="legend" id="heatLegend"></div>
+</section>
+
+<section class="panel" role="tabpanel" id="panel-coh" aria-labelledby="tab-coh" hidden>
+  <p class="panel-lede">La vue du mentor ou du responsable de programme : huit participants fictifs, statuts préremplis. Elle ne répond pas à « qui est en retard ? », mais à « où le parcours accroche-t-il ? ».</p>
+  <div id="cohCallout"></div>
+  <div class="switch" role="group" aria-label="Mesure affichée">
+    <button type="button" data-coh="prog" aria-pressed="true">Progression validée</button>
+    <button type="button" data-coh="over" aria-pressed="false">Surévaluation</button>
+  </div>
+  <div class="scroll"><table class="heat coh" id="coh"></table></div>
+  <div class="legend" id="cohLegend"></div>
+
+  <div class="section-gap">
+    <h2>Là où toute la cohorte se surévalue</h2>
+    <p class="panel-lede">Comportements pour lesquels au moins cinq participants sur huit se donnent un statut plus élevé que celui validé par leur mentor. Quand toute une cohorte se trompe au même endroit, le problème n'est pas individuel : la cible est mal comprise, ou la formation la présente mal.</p>
+    <div id="overCallout"></div>
+    <div class="scroll"><table class="over" id="overTable"></table></div>
+    <div class="legend"><span><span class="mk up" aria-hidden="true">▲</span> se surévalue</span><span><span class="mk eq" aria-hidden="true">=</span> concorde</span><span><span class="mk dn" aria-hidden="true">▼</span> se sous-évalue</span></div>
+  </div>
+</section>
+
+<section class="panel" role="tabpanel" id="panel-jour" aria-labelledby="tab-jour" hidden>
+  <p class="panel-lede">Après une activité ou une pépite, notez ce que vous en retenez et comment vous l'appliquez à un dossier en cours. C'est ce qui transforme une activité en comportement.</p>
+  <form class="jform" id="jform" novalidate>
+    <div>
+      <label class="fl" for="jbeh">Comportement</label>
+      <select id="jbeh" required></select>
+    </div>
+    <div>
+      <label class="fl" for="jret">Ce que j'en retiens</label>
+      <textarea id="jret" required></textarea>
+    </div>
+    <div>
+      <label class="fl" for="japp">Comment je l'applique à un dossier en cours</label>
+      <textarea id="japp" required></textarea>
+    </div>
+    <p class="err" id="jerr" role="alert" hidden>Remplissez les deux champs avant d'ajouter l'entrée.</p>
+    <button class="btn" type="submit">Ajouter au journal</button>
+  </form>
+  <h3 id="jcount">Entrées</h3>
+  <ul class="jlist" id="jlist" aria-labelledby="jcount"></ul>
+</section>
+
+<footer>
+  <div>Démonstration conçue et écrite par Thierry De Gagné. La mécanique s'inspire d'un instrument d'évaluation qu'il a conçu en entreprise ; le programme, les comportements, les ressources et les participants sont entièrement fictifs. HTML et JavaScript sans dépendance, produits en vibe coding avec un agent de codage IA.</div>
+  <a class="retour" href="index.html">← Portfolio</a>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- Contenu ---------- */
+var PTYPES = {E:"Capsule e-learning", V:"Vidéo", T:"Texte", I:"Infographie", L:"Liste à cocher"};
+var PALIERS = ["Exposé","Accompagné","Autonome"];
+var STAT = ["Non acquis","Partiellement acquis","Acquis"];
+
+var CAPS = [
+ {name:"Orchestrer les partenaires internes", axe:"Axe comportemental", paliers:[
+  {acts:[["E-learning","Carte des partenaires"],["Observation","Rencontre conjointe"]], b:[
+   ["*Nomme les partenaires internes clés (crédit, gestion de trésorerie, gestion de patrimoine, change, assurances) et ce que chacun apporte à une relation commerciale",["E|Qui fait quoi autour du directeur de comptes|12","I|La carte des partenaires internes|3"]],
+   ["Observe une rencontre conjointe entre un directeur de comptes et un partenaire, et en résume les étapes",["L|Grille d'observation d'une rencontre conjointe|5","V|Une rencontre à trois, commentée|9"]],
+   ["Achemine une demande simple au bon partenaire, avec l'information de base sur le client",["T|Les cinq informations qu'un partenaire veut recevoir|4","L|Avant d'envoyer une demande à un partenaire|2"]],
+   ["Assure le suivi d'une demande transmise et en informe son directeur de comptes",["T|Boucler une demande : le suivi qui rassure|3","I|Le cycle d'une demande interne|2"]]]},
+  {acts:[["Coaching","Préparation d'une rencontre"],["Démo","Rencontre conjointe"]], b:[
+   ["Prépare une demande de référence complète (contexte, besoin, échéance) avant d'impliquer un partenaire",["L|Gabarit de demande de référence|3","V|Bonne et mauvaise référence, côte à côte|6","T|Pourquoi le contexte fait gagner une semaine|4"]],
+   ["*Coanime avec son gestionnaire une rencontre client à laquelle participe un partenaire",["V|Partager la parole sans perdre le fil|8","L|Préparer une rencontre conjointe en 15 minutes|4"]],
+   ["Précise qui fait quoi et pour quand à la fin d'une rencontre conjointe, et le note au dossier",["I|La fin de rencontre en trois questions|2","L|Note de suivi après une rencontre conjointe|3"]],
+   ["Relance un partenaire quand un engagement tarde, sans attendre que le client s'en plaigne",["T|Relancer sans froisser : formulations utiles|4","E|Gérer ses engagements ouverts|10"]],
+   ["Signale à son gestionnaire un conflit de priorités entre partenaires au lieu de le contourner",["T|Quand escalader, et comment le dire|5","V|Un conflit de priorités, deux façons de le traiter|7"]]]},
+  {acts:[["Coaching","Plan de relation"],["Observation","Par le mentor"]], b:[
+   ["*Mobilise de lui-même les partenaires requis dès qu'un besoin du client dépasse le crédit",["E|Lire un besoin qui dépasse le crédit|15","I|Les signaux qui appellent un partenaire|3"]],
+   ["Mène une rencontre client avec plusieurs partenaires et en tient l'ordre du jour",["L|Ordre du jour type d'une rencontre à plusieurs partenaires|3","V|Tenir l'ordre du jour quand tout le monde parle|9"]],
+   ["Règle un désaccord entre partenaires en ramenant la discussion à l'intérêt du client",["T|Ramener la discussion au client|5","V|Un désaccord entre partenaires, commenté|8"]],
+   ["Tient un plan de relation partagé où chaque partenaire voit ses engagements",["L|Gabarit de plan de relation partagé|4","I|Ce qu'un plan de relation doit montrer|2"]],
+   ["Informe les partenaires de l'issue des dossiers qu'ils ont soutenus",["T|Le retour qui entretient le réseau interne|3","L|Message de clôture à un partenaire|2"]]]}
+ ]},
+ {name:"Conseiller l'entrepreneur et bâtir l'engagement", axe:"Axe client", paliers:[
+  {acts:[["Observation","Deux rencontres client"],["E-learning","Cycle d'affaires d'une PME"]], b:[
+   ["*Décrit le cycle d'affaires d'un client PME à partir de son dossier : activité, saisonnalité, principaux clients et fournisseurs",["E|Comprendre le cycle d'exploitation d'une PME|14","I|Saisonnalité et besoins de liquidités|3","T|Lire un dossier client en 20 minutes|5"]],
+   ["Prépare une fiche de rencontre (questions à poser, information à valider) avant d'accompagner son gestionnaire",["L|Fiche de préparation de rencontre|3","V|Préparer une rencontre en 10 minutes|6"]],
+   ["Rédige des notes de rencontre utilisables et les verse au dossier le jour même",["T|Des notes qu'un collègue peut reprendre|4","L|Ce que toute note de rencontre contient|2"]],
+   ["Distingue ce que l'entrepreneur dit vouloir de ce que montrent ses états financiers",["E|Ce que racontent les états financiers|12","T|Trois écarts fréquents entre le discours et les chiffres|5"]]]},
+  {acts:[["Laboratoire","Jeu de rôle : la découverte"],["Coaching","Retour sur une rencontre"]], b:[
+   ["Mène la partie découverte d'une rencontre avec des questions ouvertes sur les projets de l'entreprise",["V|La découverte en questions ouvertes|8","I|L'entonnoir de questionnement|2","L|Banque de questions sur les projets de l'entreprise|3"]],
+   ["*Reformule les enjeux de l'entrepreneur et fait valider sa compréhension avant de proposer quoi que ce soit",["V|Reformuler avant de proposer|6","E|L'écoute active en contexte d'affaires|10"]],
+   ["Explique une solution de financement en langage d'affaires, sans jargon bancaire",["T|Petit lexique bancaire traduit en langage d'entrepreneur|5","V|Expliquer un covenant en une phrase|4"]],
+   ["Repère un besoin de relève ou de transfert d'entreprise et en parle à son gestionnaire",["E|Repérer un enjeu de relève|12","I|Les signes d'un transfert d'entreprise à venir|3"]],
+   ["Respecte chaque engagement pris en rencontre (envoi, rappel, réponse) dans le délai annoncé",["L|Tableau de suivi des engagements client|2","T|Pourquoi la promesse tenue vaut plus que le taux|3"]]]},
+  {acts:[["Observation","Revue annuelle, par le mentor"],["Coaching","Annoncer un refus"]], b:[
+   ["*Conduit seul la revue annuelle d'un client et en ressort avec un plan d'action convenu",["L|Déroulement d'une revue annuelle|4","V|Une revue annuelle complète, annotée|18","T|Sortir d'une revue avec un plan convenu|5"]],
+   ["Anticipe les besoins du client à partir de ses résultats et de son secteur, avant qu'il les exprime",["E|Lire un secteur d'activité|15","I|Indicateurs à surveiller par secteur|3"]],
+   ["Annonce une mauvaise nouvelle (refus, condition ajoutée) en expliquant le raisonnement et les options",["V|Annoncer un refus en gardant la relation|9","T|Une mauvaise nouvelle en trois temps : fait, raison, options|4"]],
+   ["Élargit la relation à un deuxième produit quand ça sert réellement le client",["T|Proposer un produit parce qu'il sert le client|4","E|Analyser la relation globale|12"]],
+   ["Obtient du client une recommandation ou une introduction auprès d'un autre entrepreneur",["V|Demander une introduction sans malaise|5","L|Les bons moments pour demander une recommandation|2"]]]}
+ ]},
+ {name:"Repérer, structurer, négocier et tarifer", axe:"Axe conseil", paliers:[
+  {acts:[["E-learning","Ratios de crédit"],["Laboratoire","Cas chiffré"]], b:[
+   ["*Calcule et interprète les ratios de base (fonds de roulement, endettement, couverture du service de la dette) à partir des états financiers",["E|Les ratios de base, calculés pas à pas|20","I|Aide-mémoire des ratios de crédit|2","L|Exercice : trois jeux d'états financiers|25"]],
+   ["Distingue les grands types de financement (marge d'exploitation, prêt à terme, crédit-bail) et l'usage de chacun",["I|Quel financement pour quel besoin|3","E|Les familles de financement commercial|12"]],
+   ["Repère dans un dossier les signes d'un besoin de financement à venir : croissance, investissement, saisonnalité",["T|Lire les signaux d'un besoin de financement|5","I|Croissance, investissement, saisonnalité|2"]],
+   ["Explique à son gestionnaire la logique de la grille de tarification sur un dossier simple",["E|La logique d'une grille de tarification|10","T|Le prix d'un crédit, expliqué simplement|4"]]]},
+  {acts:[["Laboratoire","Bâtir une proposition"],["Démo","Comité de crédit simulé"]], b:[
+   ["Prépare une proposition de financement complète à partir des états financiers du client",["L|Plan type d'une proposition de financement|4","V|Bâtir une proposition à partir des états financiers|14"]],
+   ["Justifie la structure retenue (termes, garanties, covenants) devant son gestionnaire",["T|Termes, garanties, covenants : justifier chaque choix|6","V|Défendre sa structure devant son gestionnaire|8"]],
+   ["Applique la grille de tarification et explique l'écart demandé, le cas échéant",["E|Demander un écart de tarification|10","L|Arguments recevables pour un écart|2"]],
+   ["Repère les éléments à valider avec le crédit avant de s'engager auprès du client",["L|Points à valider avec le crédit avant de s'engager|3","T|Ce qu'on ne promet pas au client avant le crédit|4"]],
+   ["*Présente le dossier au comité de crédit et répond aux questions de risque",["V|Un comité de crédit simulé, commenté|16","T|Les questions de risque qui reviennent|6","L|Préparer sa présentation au comité|3"]]]},
+  {acts:[["Coaching","Préparer une négociation"],["Observation","Négociation réelle"]], b:[
+   ["*Structure seul un financement complexe (plusieurs facilités, garanties multiples) adapté au cycle de l'entreprise",["E|Structurer un financement à plusieurs facilités|20","I|Arrimer la structure au cycle de l'entreprise|3"]],
+   ["Négocie les conditions avec le client en sachant d'avance ce qui est négociable et ce qui ne l'est pas",["V|Négocier en connaissant ses marges|10","T|Négociable ou non : faire la liste avant la rencontre|4"]],
+   ["Défend une tarification qui reflète le risque et la rentabilité globale de la relation",["E|Rentabilité globale d'une relation|14","I|Risque, rendement et prix|2"]],
+   ["Repère des occasions de financement dans son portefeuille sans attendre la demande du client",["L|Revue de portefeuille orientée occasions|3","T|Trois occasions qu'on rate souvent|4"]],
+   ["Recommande de ne pas financer quand la structure ne tient pas, et le dit au client",["T|Dire non : la responsabilité du conseiller|5","V|Un refus bien expliqué|7"]]]}
+ ]},
+ {name:"Souscrire et protéger la qualité du portefeuille", axe:"Axe qualité", paliers:[
+  {acts:[["E-learning","Conformité"],["Démo","Lecture d'une convention"]], b:[
+   ["*Applique les exigences de connaissance du client et de conformité à l'ouverture d'un dossier",["E|Connaissance du client et conformité|18","L|Documents requis à l'ouverture d'un dossier|2"]],
+   ["Explique les composantes d'une cote de risque et ce qui la fait varier",["I|Les composantes d'une cote de risque|3","E|Comprendre la cotation du risque|12"]],
+   ["Lit une convention de crédit et y repère les covenants et leurs seuils",["T|Lire une convention de crédit|8","L|Repérer les covenants et leurs seuils|3"]],
+   ["Tient à jour la liste des documents à recevoir (états financiers, attestations, rapports) pour ses dossiers",["L|Échéancier des documents à recevoir|2","T|Pourquoi un document manquant devient un risque|3"]]]},
+  {acts:[["Laboratoire","Vérification des covenants"],["Coaching","Client sous surveillance"]], b:[
+   ["Vérifie le respect des covenants à la réception des états financiers",["E|Vérifier les covenants pas à pas|15","L|Exercice : calcul de trois covenants|20","V|Les erreurs de calcul les plus fréquentes|6"]],
+   ["*Repère les signes avant-coureurs d'une détérioration (retards, dépassements de marge, baisse de la marge brute) et les signale",["I|Les signes avant-coureurs d'une détérioration|3","V|Lire un compte qui se détériore|10","T|Signaler tôt plutôt que tard|4"]],
+   ["Documente son analyse de risque pour qu'un collègue puisse la reprendre sans lui",["T|Une analyse de risque qu'un tiers peut reprendre|5","L|Les éléments d'une analyse documentée|2"]],
+   ["Prépare le renouvellement d'un crédit à temps, sans dossier échu",["L|Calendrier de renouvellement|2","E|Préparer un renouvellement sans échéance dépassée|10"]],
+   ["Propose à son gestionnaire des mesures correctives pour un client sous surveillance",["E|Clients sous surveillance : les mesures possibles|14","T|Proposer des mesures réalistes|4"]]]},
+  {acts:[["Coaching","Revue de portefeuille"],["Observation","Dossier en redressement"]], b:[
+   ["*Répond de la qualité de son portefeuille : aucun document en retard, aucune exception sans justification",["L|Revue mensuelle de la qualité du portefeuille|4","I|Tableau de bord de portefeuille|2"]],
+   ["Gère seul un client en difficulté : plan de redressement, conditions, suivi rapproché",["E|Accompagner un client en redressement|20","V|Un plan de redressement, de l'intérieur|12"]],
+   ["Ajuste ses cotes de risque dès qu'une information nouvelle arrive, sans attendre la revue annuelle",["T|Quand une information doit faire bouger la cote|5","I|Les événements qui déclenchent une révision|2"]],
+   ["Décide quand transférer un dossier à une équipe spécialisée et prépare la passation",["L|Note de passation à une équipe spécialisée|3","T|Reconnaître le moment de transférer|4"]],
+   ["Refuse ou restructure plutôt que d'accepter une exception qu'il ne peut pas défendre",["T|L'exception qu'on ne peut pas défendre|5","V|Restructurer plutôt qu'accepter|8"]]]}
+ ]},
+ {name:"Se développer et faire progresser les autres", axe:"Axe développement", paliers:[
+  {acts:[["Coaching","Objectifs SMART"],["E-learning","Démarrer sa rotation"]], b:[
+   ["*Fixe avec son coach ses objectifs de rotation, formulés de façon SMART",["E|Écrire des objectifs SMART|10","L|Gabarit d'objectifs de rotation|3"]],
+   ["Demande une rétroaction après chaque rencontre client ou présentation",["T|Demander une rétroaction utile|3","I|Trois questions à poser après une rencontre|2"]],
+   ["Inscrit au journal ce qu'il retient d'une activité et comment il l'applique",["V|Pourquoi tenir un journal de transfert|4","T|Des entrées de journal réussies|4"]],
+   ["Termine dans les délais les modules en ligne prévus à son parcours",["L|Mon parcours en ligne, étape par étape|2","I|Planifier ses modules sur la rotation|2"]]]},
+  {acts:[["Coaching","Séances régulières"],["Démo","Partage en cohorte"]], b:[
+   ["*Prépare ses séances de coaching : dossier choisi, question précise, progrès depuis la dernière séance",["L|Préparer une séance de coaching|3","V|Une séance préparée, une séance improvisée|8"]],
+   ["Transforme une rétroaction reçue en action concrète, vérifiable à la séance suivante",["T|De la rétroaction à l'action vérifiable|4","L|Plan d'action d'une séance à l'autre|2"]],
+   ["Partage avec la cohorte une leçon tirée d'un dossier, réussite ou erreur",["T|Raconter une erreur pour que d'autres en profitent|4","I|La structure d'un partage en cohorte|2"]],
+   ["Repère lui-même ses comportements non acquis et propose l'activité qui y répond",["E|S'autoévaluer avec justesse|12","T|Choisir l'activité qui répond à un écart|4"]]]},
+  {acts:[["Observation","Accompagnement d'un pair"],["Coaching","Donner de la rétroaction"]], b:[
+   ["*Accompagne un nouveau participant de la rotation sur un dossier réel",["E|Accompagner un pair sur un dossier réel|14","L|Les cinq étapes d'un accompagnement|2"]],
+   ["Donne une rétroaction précise, fondée sur des faits observés",["V|Rétroaction factuelle : avant, après|7","I|Le modèle fait, effet, piste|2"]],
+   ["Anime un partage de pratiques sur un sujet qu'il maîtrise",["L|Animer un partage de pratiques en 30 minutes|3","T|Choisir son sujet et son cas|3"]],
+   ["S'évalue avec justesse : son autoévaluation concorde avec celle de son mentor",["T|Lire l'écart entre mon évaluation et celle de mon mentor|5","I|Les biais d'autoévaluation les plus courants|3"]],
+   ["Fait une veille continue sur les secteurs de ses clients, les taux et la réglementation",["L|Ma routine de veille hebdomadaire|2","T|Sources de veille sectorielle et réglementaire|4"]]]}
+ ]}
+];
+
+/* Aplatir */
+var BEH = [], BYID = {};
+CAPS.forEach(function(c, ci){
+  c.paliers.forEach(function(p, pi){
+    p.ids = [];
+    p.b.forEach(function(raw, bi){
+      var star = raw[0].charAt(0) === "*";
+      var o = {id:"C"+(ci+1)+"."+(pi+1)+"."+(bi+1), cap:ci, pal:pi, idx:bi, star:star,
+        text: star ? raw[0].slice(1) : raw[0],
+        pep: raw[1].map(function(s){ var a = s.split("|"); return {type:a[0], title:a[1], min:+a[2]}; })};
+      BEH.push(o); BYID[o.id] = o; p.ids.push(o.id);
+    });
+  });
+});
+
+/* ---------- Stockage ---------- */
+var KEY = "cahier-dev-demo-v1", THEMEKEY = "cahier-dev-theme";
+var storageOK = true;
+function sget(k){ try{ return window.localStorage.getItem(k); }catch(e){ storageOK = false; return null; } }
+function sset(k, v){ try{ window.localStorage.setItem(k, v); return true; }catch(e){ storageOK = false; return false; } }
+(function testStorage(){ try{ var t="__t"; window.localStorage.setItem(t,"1"); window.localStorage.removeItem(t); }catch(e){ storageOK = false; } })();
+function showStorageWarn(){ if(!storageOK) document.getElementById("storageWarn").classList.add("on"); }
+
+function blankState(){
+  var s = {auto:{}, mentor:{}, journal:[], cap:0};
+  BEH.forEach(function(b){ s.auto[b.id] = 0; s.mentor[b.id] = null; });
+  return s;
+}
+function exampleState(){
+  var s = blankState();
+  /* deux caractères par comportement : auto puis mentor ("-" = à valider) */
+  var EX = [
+    ["22 22 22 22","22 21 22 1- 0-","0- 0- 0- 0- 0-"],
+    ["22 22 21 22","2- 21 1- 0- 2-","0- 0- 0- 0- 0-"],
+    ["22 22 21 22","1- 0- 2- 1- 0-","0- 0- 0- 0- 0-"],
+    ["22 22 21 22","21 21 1- 0- 0-","0- 0- 0- 0- 0-"],
+    ["22 22 22 21","2- 1- 1- 2-","0- 0- 0- 0- 0-"]
+  ];
+  EX.forEach(function(cap, ci){ cap.forEach(function(str, pi){
+    str.split(" ").forEach(function(pair, bi){
+      var id = "C"+(ci+1)+"."+(pi+1)+"."+(bi+1);
+      s.auto[id] = +pair.charAt(0);
+      s.mentor[id] = pair.charAt(1) === "-" ? null : +pair.charAt(1);
+    });
+  }); });
+  s.journal = [
+    {id:"j2", beh:"C3.1.1", date:"2026-10-08", ret:"Le ratio de couverture du service de la dette se calcule sur les flux, pas sur le bénéfice net. J'avais oublié d'ajouter l'amortissement.", app:"Dans le dossier de l'atelier d'usinage (fictif), je refais le calcul avec le BAIIA et je compare au seuil de la convention avant ma rencontre de jeudi."},
+    {id:"j1", beh:"C1.2.3", date:"2026-10-02", ret:"Finir la rencontre en nommant qui fait quoi et pour quand évite trois courriels de relance la semaine suivante.", app:"À la rencontre avec la gestion de trésorerie pour le distributeur alimentaire, je garde les cinq dernières minutes pour ça et je l'écris au dossier le jour même."}
+  ];
+  s.cap = 0;
+  return s;
+}
+function loadState(){
+  var raw = sget(KEY);
+  if(!raw) return exampleState();
+  try{
+    var s = JSON.parse(raw), base = blankState();
+    BEH.forEach(function(b){
+      var a = s.auto && s.auto[b.id], m = s.mentor && s.mentor[b.id];
+      base.auto[b.id] = (a===0||a===1||a===2) ? a : 0;
+      base.mentor[b.id] = (m===0||m===1||m===2) ? m : null;
+    });
+    base.journal = Array.isArray(s.journal) ? s.journal.filter(function(j){ return j && BYID[j.beh]; }) : [];
+    base.cap = (s.cap>=0 && s.cap<CAPS.length) ? s.cap : 0;
+    return base;
+  }catch(e){ return exampleState(); }
+}
+var S = loadState();
+function save(){ if(!sset(KEY, JSON.stringify(S))) showStorageWarn(); }
+
+/* ---------- Calculs ---------- */
+function palStats(ci, pi, src){
+  var p = CAPS[ci].paliers[pi], n = p.ids.length, acq = 0, part = 0, starOK = false;
+  p.ids.forEach(function(id){
+    var v = src[id];
+    if(v === 2){ acq++; if(BYID[id].star) starOK = true; }
+    else if(v === 1) part++;
+  });
+  var need = n - 1;
+  return {n:n, acq:acq, part:part, need:need, starOK:starOK, pass:(acq>=need && starOK), pct:(acq + part*0.5)/n};
+}
+function gapOf(id, a, m){
+  if(m === null || m === undefined) return null;
+  return a - m;
+}
+function bucket(p){ if(p<=0) return 0; if(p<.35) return 1; if(p<.65) return 2; if(p<.9) return 3; return 4; }
+function pctTxt(p){ return Math.round(p*100) + " %"; }
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+/* ---------- Vue « Mon cahier » ---------- */
+var capnav = document.getElementById("capnav"), capview = document.getElementById("capview");
+
+function capPct(ci){
+  var tot = 0, n = 0;
+  CAPS[ci].paliers.forEach(function(p, pi){ var st = palStats(ci, pi, S.mentor); tot += st.pct * st.n; n += st.n; });
+  return tot / n;
+}
+function capPassed(ci){
+  var k = 0;
+  for(var pi=0; pi<3; pi++){ if(palStats(ci, pi, S.mentor).pass) k++; else break; }
+  return k;
+}
+function renderCapnav(){
+  capnav.innerHTML = CAPS.map(function(c, ci){
+    var p = capPct(ci), k = capPassed(ci);
+    return '<button type="button" class="capbtn" data-cap="'+ci+'" aria-pressed="'+(ci===S.cap)+'">'+
+      '<span class="cc">C'+(ci+1)+'</span><span class="cn">'+esc(c.name)+'</span>'+
+      '<span class="cp">'+k+'/3 paliers · '+pctTxt(p)+' validé</span>'+
+      '<span class="mbar" aria-hidden="true"><i style="width:'+Math.round(p*100)+'%"></i></span></button>';
+  }).join("");
+}
+function pillHTML(id, kind){
+  var v = kind === "auto" ? S.auto[id] : S.mentor[id];
+  var cls = (v === null) ? "sn" : "s"+v;
+  var label = (v === null) ? "À valider" : STAT[v];
+  var who = kind === "auto" ? "Mon évaluation" : "Validé par le mentor";
+  return '<button type="button" class="pill '+cls+'" data-k="'+kind+'" data-id="'+id+'" aria-label="'+who+' pour '+id+' : '+label+'. Activer pour changer.">'+
+    '<span class="dot" aria-hidden="true"></span><span>'+label+'</span></button>';
+}
+function gapHTML(id){
+  var g = gapOf(id, S.auto[id], S.mentor[id]);
+  if(g === null) return '<span class="gap" aria-hidden="true"></span>';
+  if(g > 0) return '<span class="gap over">▲ Surévaluation de '+g+' niveau'+(g>1?'x':'')+'</span>';
+  if(g < 0) return '<span class="gap under">▼ Sous-évaluation de '+(-g)+' niveau'+(g<-1?'x':'')+'</span>';
+  return '<span class="gap same">= Concorde</span>';
+}
+function behHTML(b){
+  var total = b.pep.reduce(function(s,p){ return s + p.min; }, 0);
+  return '<li class="beh" id="b-'+b.id+'">'+
+    '<div class="beh-top"><span class="code">'+b.id+'</span><p class="beh-text">'+esc(b.text)+(b.star?'<span class="star" title="Comportement obligatoire pour sortir du palier">★ obligatoire</span>':'')+'</p></div>'+
+    '<div class="beh-ctrl" id="ctrl-'+b.id+'">'+ctrlInner(b.id)+
+      '<button type="button" class="more" aria-expanded="false" aria-controls="pep-'+b.id+'"><span class="chev" aria-hidden="true">▸</span> Pépites ('+b.pep.length+')</button>'+
+    '</div>'+
+    '<div class="pep" id="pep-'+b.id+'" hidden><h3>Pépites d\'apprentissage · environ '+total+' min</h3><ul>'+
+      b.pep.map(function(p){ return '<li><span class="ptype">'+PTYPES[p.type]+'</span><span>'+esc(p.title)+'</span><span class="pdur">'+p.min+' min</span></li>'; }).join("")+
+    '</ul><button type="button" class="linkbtn" data-journal="'+b.id+'">Noter au journal ce que j\'en retiens →</button></div>'+
+  '</li>';
+}
+function ctrlInner(id){
+  return '<div class="stg"><span class="stl">Mon évaluation</span>'+pillHTML(id,"auto")+'</div>'+
+         '<div class="stg"><span class="stl">Validé par le mentor</span>'+pillHTML(id,"mentor")+'</div>'+
+         '<span class="gapwrap" id="gap-'+id+'" style="display:flex">'+gapHTML(id)+'</span>';
+}
+function palSumHTML(ci, pi){
+  var m = palStats(ci, pi, S.mentor), a = palStats(ci, pi, S.auto);
+  var miss = [];
+  if(m.acq < m.need) miss.push("il manque "+(m.need-m.acq)+" acquis validé"+((m.need-m.acq)>1?"s":""));
+  if(!m.starOK) miss.push("le comportement ★ n'est pas validé acquis");
+  var verdict = m.pass ? '<div class="verdict yes">✓ Critère de sortie atteint</div>'
+                       : '<div class="verdict no">Pas encore : '+miss.join(" et ")+'.</div>';
+  return '<div class="bars">'+
+    '<div class="barrow"><span class="lab">Validé</span><span class="bar" aria-hidden="true"><i style="width:'+(m.acq/m.n*100)+'%"></i></span><span class="num">'+m.acq+'/'+m.n+'</span></div>'+
+    '<div class="barrow"><span class="lab">Mon éval.</span><span class="bar auto" aria-hidden="true"><i style="width:'+(a.acq/a.n*100)+'%"></i></span><span class="num">'+a.acq+'/'+a.n+'</span></div>'+
+    '<div aria-live="polite">'+verdict+'</div></div>';
+}
+function renderCap(){
+  var ci = S.cap, c = CAPS[ci];
+  var html = '<div class="caphead"><div class="axe">C'+(ci+1)+' · '+esc(c.axe)+'</div><h2>'+esc(c.name)+'</h2></div>';
+  c.paliers.forEach(function(p, pi){
+    var n = p.ids.length;
+    html += '<section class="palier" id="pal-'+ci+'-'+pi+'" aria-labelledby="palh-'+ci+'-'+pi+'">'+
+      '<div class="pal-head"><div>'+
+        '<div class="pal-no">Palier '+(pi+1)+'</div><h3 class="pal-name" id="palh-'+ci+'-'+pi+'">'+PALIERS[pi]+'</h3>'+
+        '<p class="crit">Critère de sortie : '+(n-1)+' comportements sur '+n+' validés acquis, dont le ★.</p>'+
+        '<div class="acts" aria-label="Activités associées">'+p.acts.map(function(a){ return '<span class="chip"><b>'+esc(a[0])+'</b> · '+esc(a[1])+'</span>'; }).join("")+'</div>'+
+      '</div><div id="sum-'+ci+'-'+pi+'">'+palSumHTML(ci, pi)+'</div></div>'+
+      '<ul class="behs">'+p.ids.map(function(id){ return behHTML(BYID[id]); }).join("")+'</ul></section>';
+  });
+  capview.innerHTML = html;
+}
+function cycle(id, kind){
+  if(kind === "auto"){ S.auto[id] = (S.auto[id] + 1) % 3; }
+  else { var m = S.mentor[id]; S.mentor[id] = (m === null) ? 0 : (m === 2 ? null : m + 1); }
+  save();
+  var b = BYID[id];
+  var ctrl = document.getElementById("ctrl-"+id);
+  var pill = ctrl.querySelector('.pill[data-k="'+kind+'"]');
+  var tmp = document.createElement("div"); tmp.innerHTML = pillHTML(id, kind);
+  pill.replaceWith(tmp.firstChild);
+  ctrl.querySelector('.pill[data-k="'+kind+'"]').focus();
+  document.getElementById("gap-"+id).innerHTML = gapHTML(id);
+  document.getElementById("sum-"+b.cap+"-"+b.pal).innerHTML = palSumHTML(b.cap, b.pal);
+  renderCapnav();
+}
+
+capnav.addEventListener("click", function(e){
+  var btn = e.target.closest(".capbtn"); if(!btn) return;
+  S.cap = +btn.dataset.cap; save(); renderCapnav(); renderCap();
+});
+capview.addEventListener("click", function(e){
+  var pill = e.target.closest(".pill");
+  if(pill){ cycle(pill.dataset.id, pill.dataset.k); return; }
+  var more = e.target.closest(".more");
+  if(more){
+    var panel = document.getElementById(more.getAttribute("aria-controls"));
+    var open = more.getAttribute("aria-expanded") === "true";
+    more.setAttribute("aria-expanded", String(!open)); panel.hidden = open; return;
+  }
+  var j = e.target.closest("[data-journal]");
+  if(j){ openJournalFor(j.dataset.journal); }
+});
+
+/* ---------- Carte de chaleur ---------- */
+var heatMode = "mentor";
+function renderHeat(){
+  var src = heatMode === "mentor" ? S.mentor : S.auto;
+  var tot = 0, totA = 0, over = 0, under = 0, todo = 0;
+  BEH.forEach(function(b){
+    var m = S.mentor[b.id], a = S.auto[b.id];
+    tot += (m===2?1:m===1?.5:0); totA += (a===2?1:a===1?.5:0);
+    if(m === null) todo++; else if(a > m) over++; else if(a < m) under++;
+  });
+  document.getElementById("kpis").innerHTML =
+    '<div class="kpi"><div class="v">'+pctTxt(tot/BEH.length)+'</div><div class="l">Progression globale validée</div></div>'+
+    '<div class="kpi"><div class="v">'+pctTxt(totA/BEH.length)+'</div><div class="l">Progression selon mon évaluation</div></div>'+
+    '<div class="kpi"><div class="v">'+over+' <span style="font-size:16px;color:var(--ink-3)">▲</span> / '+under+' <span style="font-size:16px;color:var(--ink-3)">▼</span></div><div class="l">Écarts : surévaluations / sous-évaluations</div></div>'+
+    '<div class="kpi"><div class="v">'+todo+'</div><div class="l">Comportements à valider avec le mentor</div></div>';
+  var h = '<caption class="sr">Carte de chaleur par capacité et par palier, '+(heatMode==="mentor"?"statuts validés":"selon mon évaluation")+'</caption>'+
+    '<thead><tr><th scope="col">Capacité</th>'+PALIERS.map(function(p,i){ return '<th scope="col">'+(i+1)+' · '+p+'</th>'; }).join("")+'<th scope="col">Capacité</th></tr></thead><tbody>';
+  CAPS.forEach(function(c, ci){
+    h += '<tr><th scope="row">C'+(ci+1)+' · '+esc(c.name)+'<span class="axe">'+esc(c.axe)+'</span></th>';
+    var sum = 0, n = 0;
+    c.paliers.forEach(function(p, pi){
+      var st = palStats(ci, pi, src); sum += st.pct*st.n; n += st.n;
+      var overN = p.ids.filter(function(id){ var m = S.mentor[id]; return m !== null && S.auto[id] > m; }).length;
+      var tag = [];
+      if(heatMode === "mentor" && st.pass) tag.push("✓ franchi");
+      if(overN) tag.push("▲ "+overN);
+      h += '<td><button type="button" class="cell b'+bucket(st.pct)+'" data-goto="'+ci+'-'+pi+'" aria-label="C'+(ci+1)+', palier '+(pi+1)+' : '+pctTxt(st.pct)+(st.pass&&heatMode==="mentor"?", palier franchi":"")+(overN?", "+overN+" surévaluation"+(overN>1?"s":""):"")+'. Ouvrir le palier.">'+
+        '<span class="pc">'+pctTxt(st.pct)+'</span><span class="tag">'+(tag.join(" · ")||"&nbsp;")+'</span></button></td>';
+    });
+    var cp = sum/n;
+    h += '<td><div class="cell b'+bucket(cp)+'"><span class="pc">'+pctTxt(cp)+'</span><span class="tag">'+capPassed(ci)+'/3 paliers</span></div></td></tr>';
+  });
+  document.getElementById("heat").innerHTML = h + '</tbody>';
+  document.getElementById("heatLegend").innerHTML = legendHTML() + '<span>✓ critère de sortie atteint</span><span>▲ comportements où vous vous surévaluez</span>';
+}
+function legendHTML(){
+  return ['0 %','1–34 %','35–64 %','65–89 %','90–100 %'].map(function(t, i){ return '<span><i class="b'+i+'"></i>'+t+'</span>'; }).join("");
+}
+document.querySelector('#panel-heat .switch').addEventListener("click", function(e){
+  var b = e.target.closest("button[data-heat]"); if(!b) return;
+  heatMode = b.dataset.heat;
+  this.querySelectorAll("button").forEach(function(x){ x.setAttribute("aria-pressed", String(x === b)); });
+  renderHeat();
+});
+document.getElementById("heat").addEventListener("click", function(e){
+  var c = e.target.closest("[data-goto]"); if(!c) return;
+  var parts = c.dataset.goto.split("-");
+  S.cap = +parts[0]; save(); renderCapnav(); renderCap(); selectTab("tab-cahier");
+  var el = document.getElementById("pal-"+parts[0]+"-"+parts[1]);
+  if(el){ el.scrollIntoView({behavior:"smooth", block:"start"}); el.setAttribute("tabindex","-1"); el.focus({preventScroll:true}); }
+});
+
+/* ---------- Cohorte fictive ---------- */
+var COH_NAMES = ["Camille R.","Jérémie L.","Sofia M.","Mathis B.","Léa D.","Karim H.","Émilie G.","Olivier P."];
+var COH_L = [
+  [2.6,2.4,2.1,1.4,2.5],[1.9,2.0,1.6,1.2,2.0],[2.8,2.7,2.4,1.5,2.6],[1.5,1.7,1.3,1.1,1.6],
+  [2.2,2.5,2.0,1.4,2.3],[2.0,1.8,2.3,1.3,1.9],[2.4,2.2,1.9,1.5,2.2],[1.7,1.6,1.5,1.0,1.8]
+];
+var BLIND = ["C4.2.1","C4.2.2","C3.2.3","C5.2.4"];
+function rng(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+var COH = COH_NAMES.map(function(name, pi){
+  var r = rng(pi*97 + 13), v = {}, a = {};
+  BEH.forEach(function(b){
+    var L = COH_L[pi][b.cap], f = Math.max(0, Math.min(1, L - b.pal));
+    var n = CAPS[b.cap].paliers[b.pal].ids.length, t = (b.idx + 0.5)/n, jit = (r() - 0.5)*0.2, s;
+    if(f >= 1) s = 2; else s = f >= t + 0.12 + jit ? 2 : (f >= t - 0.12 + jit ? 1 : 0);
+    if(b.id === "C4.2.2") s = Math.min(s, 1);
+    var au = s, x = r();
+    if(pi === 3 && x < 0.3) au = s + 1;
+    else if(pi === 4 && x < 0.2) au = s - 1;
+    else if(x < 0.06) au = s + 1;
+    else if(x < 0.10) au = s - 1;
+    if(BLIND.indexOf(b.id) >= 0){ s = Math.min(s, 1); au = (pi === 2) ? s : 2; }
+    v[b.id] = s; a[b.id] = Math.max(0, Math.min(2, au));
+  });
+  return {name:name, v:v, a:a};
+});
+function cohCap(p, ci){
+  var tot = 0, n = 0, passed = 0, over = 0, stop = false;
+  CAPS[ci].paliers.forEach(function(pal, pi){
+    var st = palStats(ci, pi, p.v); tot += st.pct*st.n; n += st.n;
+    if(!stop && st.pass) passed++; else stop = true;
+    pal.ids.forEach(function(id){ if(p.a[id] > p.v[id]) over++; });
+  });
+  return {pct:tot/n, passed:passed, over:over};
+}
+var cohMode = "prog";
+function renderCoh(){
+  /* capacité qui bloque : la moins franchie au palier 2 */
+  var clear2 = CAPS.map(function(c, ci){ return COH.filter(function(p){ return palStats(ci,1,p.v).pass; }).length; });
+  var worst = 0; clear2.forEach(function(k, ci){ if(k < clear2[worst]) worst = ci; });
+  var avgs = CAPS.map(function(c, ci){ return COH.reduce(function(s,p){ return s + cohCap(p,ci).pct; },0)/COH.length; });
+  document.getElementById("cohCallout").innerHTML =
+    '<div class="callout"><strong>C'+(worst+1)+' bloque toute la cohorte.</strong>'+
+    (clear2[worst]===0 ? 'Aucun' : clear2[worst]+' seulement') +' des 8 participants n\'a franchi le palier Accompagné en « '+esc(CAPS[worst].name.toLowerCase())+' », alors que la plupart l\'ont franchi ailleurs. Ce n\'est pas un retard individuel : c\'est le parcours qui accroche à cet endroit, et ça se règle dans la conception du programme, pas en coaching un à un.</div>';
+
+  var h = '<caption class="sr">Cohorte fictive : '+(cohMode==="prog"?"progression validée":"nombre de surévaluations")+' par capacité et par participant</caption>'+
+    '<thead><tr><th scope="col" style="text-align:left">Capacité</th>'+COH.map(function(p){ return '<th scope="col">'+esc(p.name)+'</th>'; }).join("")+'<th scope="col">Cohorte</th></tr></thead><tbody>';
+  CAPS.forEach(function(c, ci){
+    h += '<tr'+(ci===worst && cohMode==="prog"?' class="hot"':'')+'><th scope="row">C'+(ci+1)+' · '+esc(c.name)+'</th>';
+    var sumOver = 0;
+    COH.forEach(function(p){
+      var r = cohCap(p, ci); sumOver += r.over;
+      if(cohMode === "prog"){
+        h += '<td><div class="cell b'+bucket(r.pct)+'" aria-label="'+esc(p.name)+' : '+pctTxt(r.pct)+', '+r.passed+' palier'+(r.passed>1?'s':'')+' franchi'+(r.passed>1?'s':'')+'"><span class="pc">'+pctTxt(r.pct)+'</span><span class="tag">'+r.passed+'/3</span></div></td>';
+      } else {
+        var w = r.over===0?0:r.over<=1?1:r.over<=2?2:3;
+        h += '<td><div class="cell w'+w+'" aria-label="'+esc(p.name)+' : '+r.over+' surévaluation'+(r.over>1?'s':'')+'"><span class="pc">'+(r.over?'▲ '+r.over:'=')+'</span><span class="tag">'+(r.over?'surévalué'+(r.over>1?'s':''):'concorde')+'</span></div></td>';
+      }
+    });
+    if(cohMode === "prog"){
+      h += '<td><div class="cell b'+bucket(avgs[ci])+'"><span class="pc">'+pctTxt(avgs[ci])+'</span><span class="tag">'+clear2[ci]+'/8 passent P2</span></div></td></tr>';
+    } else {
+      var avg = sumOver/COH.length, w2 = avg<0.5?0:avg<1.5?1:avg<2.5?2:3;
+      h += '<td><div class="cell w'+w2+'"><span class="pc">▲ '+avg.toFixed(1).replace(".",",")+'</span><span class="tag">en moyenne</span></div></td></tr>';
+    }
+  });
+  document.getElementById("coh").innerHTML = h + '</tbody>';
+  document.getElementById("cohLegend").innerHTML = cohMode === "prog"
+    ? legendHTML() + '<span>« 2/3 » : paliers franchis à la suite · « passent P2 » : participants qui ont franchi le palier Accompagné</span>'
+    : '<span><i class="w0"></i>aucune</span><span><i class="w1"></i>1</span><span><i class="w2"></i>2</span><span><i class="w3"></i>3 et plus</span><span>Nombre de comportements surévalués par le participant</span>';
+
+  /* comportements surévalués par la cohorte */
+  var rows = BEH.map(function(b){
+    var up = 0, dn = 0, gap = 0;
+    COH.forEach(function(p){ var d = p.a[b.id] - p.v[b.id]; if(d>0) up++; if(d<0) dn++; gap += d; });
+    return {b:b, up:up, dn:dn, gap:gap/COH.length};
+  }).filter(function(r){ return r.up >= 5; }).sort(function(x,y){ return y.up - x.up || y.gap - x.gap; });
+  document.getElementById("overCallout").innerHTML = rows.length ?
+    '<div class="callout blue"><strong>'+rows.length+' comportements, un même angle mort.</strong>Les participants croient maîtriser ce que leurs mentors ne voient pas encore. Avant d\'ajouter du coaching, il faut revoir la façon dont ces comportements sont décrits et démontrés : exemples de ce qui est attendu, contre-exemples, critère d\'observation explicite.</div>' : '';
+  var t = '<thead><tr><th scope="col">Comportement</th><th scope="col">Se surévaluent</th><th scope="col">Écart moyen</th><th scope="col">Participants</th></tr></thead><tbody>';
+  rows.forEach(function(r){
+    t += '<tr><td><span class="code">'+r.b.id+'</span><br>'+esc(r.b.text)+'</td>'+
+      '<td class="count">'+r.up+' sur 8</td>'+
+      '<td class="count">+'+r.gap.toFixed(1).replace(".",",")+' niveau</td>'+
+      '<td><div class="marks">'+COH.map(function(p){ var d = p.a[r.b.id] - p.v[r.b.id];
+        var k = d>0?"up":d<0?"dn":"eq", s = d>0?"▲":d<0?"▼":"=";
+        var lab = p.name+" : "+(d>0?"se surévalue":d<0?"se sous-évalue":"concorde")+" (auto : "+STAT[p.a[r.b.id]].toLowerCase()+", validé : "+STAT[p.v[r.b.id]].toLowerCase()+")";
+        return '<span class="mk '+k+'" title="'+esc(lab)+'" role="img" aria-label="'+esc(lab)+'">'+s+'</span>'; }).join("")+'</div></td></tr>';
+  });
+  document.getElementById("overTable").innerHTML = t + '</tbody>';
+}
+document.querySelector('#panel-coh .switch').addEventListener("click", function(e){
+  var b = e.target.closest("button[data-coh]"); if(!b) return;
+  cohMode = b.dataset.coh;
+  this.querySelectorAll("button").forEach(function(x){ x.setAttribute("aria-pressed", String(x === b)); });
+  renderCoh();
+});
+
+/* ---------- Journal ---------- */
+var jsel = document.getElementById("jbeh");
+jsel.innerHTML = CAPS.map(function(c, ci){
+  return '<optgroup label="C'+(ci+1)+' · '+esc(c.name)+'">'+
+    BEH.filter(function(b){ return b.cap === ci; }).map(function(b){
+      var t = b.text.length > 80 ? b.text.slice(0, 78) + "…" : b.text;
+      return '<option value="'+b.id+'">'+b.id+' · '+esc(t)+'</option>';
+    }).join("") + '</optgroup>';
+}).join("");
+function renderJournal(){
+  var list = document.getElementById("jlist");
+  document.getElementById("jcount").textContent = "Entrées (" + S.journal.length + ")";
+  if(!S.journal.length){ list.innerHTML = '<li class="empty">Aucune entrée pour l\'instant.</li>'; return; }
+  list.innerHTML = S.journal.map(function(j){
+    var b = BYID[j.beh];
+    return '<li class="jentry"><div class="jmeta"><span>'+esc(j.date)+' · '+b.id+'</span><button type="button" class="linkbtn" data-del="'+esc(j.id)+'" aria-label="Supprimer l\'entrée du '+esc(j.date)+' sur '+b.id+'">Supprimer</button></div>'+
+      '<p class="jbeh">'+esc(b.text)+'</p><dl><dt>Ce que j\'en retiens</dt><dd>'+esc(j.ret)+'</dd><dt>Comment je l\'applique</dt><dd>'+esc(j.app)+'</dd></dl></li>';
+  }).join("");
+}
+document.getElementById("jform").addEventListener("submit", function(e){
+  e.preventDefault();
+  var ret = document.getElementById("jret"), app = document.getElementById("japp"), err = document.getElementById("jerr");
+  if(!ret.value.trim() || !app.value.trim()){ err.hidden = false; (ret.value.trim() ? app : ret).focus(); return; }
+  err.hidden = true;
+  var d = new Date(), pad = function(n){ return (n<10?"0":"")+n; };
+  S.journal.unshift({id:"j"+Date.now(), beh:jsel.value, date:d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()), ret:ret.value.trim(), app:app.value.trim()});
+  ret.value = ""; app.value = ""; save(); renderJournal(); announce("Entrée ajoutée au journal.");
+});
+document.getElementById("jlist").addEventListener("click", function(e){
+  var d = e.target.closest("[data-del]"); if(!d) return;
+  S.journal = S.journal.filter(function(j){ return j.id !== d.dataset.del; });
+  save(); renderJournal(); announce("Entrée supprimée.");
+  document.getElementById("jret").focus();
+});
+function openJournalFor(id){
+  jsel.value = id; selectTab("tab-jour");
+  document.getElementById("jret").focus();
+}
+
+/* ---------- Onglets ---------- */
+var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+function selectTab(id){
+  tabs.forEach(function(t){
+    var on = t.id === id;
+    t.setAttribute("aria-selected", String(on)); t.tabIndex = on ? 0 : -1;
+    document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+  });
+  if(id === "tab-heat") renderHeat();
+  if(id === "tab-coh") renderCoh();
+  if(id === "tab-jour") renderJournal();
+}
+tabs.forEach(function(t, i){
+  t.addEventListener("click", function(){ selectTab(t.id); });
+  t.addEventListener("keydown", function(e){
+    var k = e.key, j = null;
+    if(k === "ArrowRight") j = (i+1) % tabs.length;
+    else if(k === "ArrowLeft") j = (i-1+tabs.length) % tabs.length;
+    else if(k === "Home") j = 0; else if(k === "End") j = tabs.length-1;
+    if(j !== null){ e.preventDefault(); tabs[j].focus(); selectTab(tabs[j].id); }
+  });
+});
+
+/* ---------- Outils ---------- */
+function announce(msg){ var m = document.getElementById("toolMsg"); m.textContent = ""; setTimeout(function(){ m.textContent = msg; }, 30); }
+function rerenderAll(){
+  renderCapnav(); renderCap();
+  var cur = tabs.filter(function(t){ return t.getAttribute("aria-selected") === "true"; })[0];
+  if(cur) selectTab(cur.id);
+}
+var resetBtn = document.getElementById("resetBtn"), resetTimer = null;
+resetBtn.addEventListener("click", function(){
+  if(!resetTimer){
+    resetBtn.textContent = "Confirmer : tout effacer ?";
+    resetTimer = setTimeout(function(){ resetBtn.textContent = "Réinitialiser"; resetTimer = null; }, 4000);
+    return;
+  }
+  clearTimeout(resetTimer); resetTimer = null; resetBtn.textContent = "Réinitialiser";
+  S = blankState(); save(); rerenderAll(); announce("Cahier réinitialisé : tous les statuts sont remis à zéro et le journal est vide.");
+});
+document.getElementById("exampleBtn").addEventListener("click", function(){
+  var cap = S.cap; S = exampleState(); S.cap = cap; save(); rerenderAll(); announce("Exemple rechargé.");
+});
+document.getElementById("exportBtn").addEventListener("click", function(){
+  var out = {
+    document: "Cahier de développement — démonstration, données fictives",
+    exporte_le: new Date().toISOString(),
+    critere_de_sortie: "n-1 comportements validés acquis par palier, dont le comportement obligatoire",
+    capacites: CAPS.map(function(c, ci){ return {
+      code: "C"+(ci+1), nom: c.name, axe: c.axe,
+      paliers: c.paliers.map(function(p, pi){ var st = palStats(ci, pi, S.mentor); return {
+        palier: pi+1, nom: PALIERS[pi], franchi: st.pass,
+        activites: p.acts.map(function(a){ return {type:a[0], libelle:a[1]}; }),
+        comportements: p.ids.map(function(id){ var b = BYID[id], m = S.mentor[id], g = gapOf(id, S.auto[id], m); return {
+          code: id, texte: b.text, obligatoire: b.star,
+          mon_evaluation: STAT[S.auto[id]], valide_par_le_mentor: m === null ? "À valider" : STAT[m],
+          ecart: g === null ? null : g,
+          pepites: b.pep.map(function(x){ return {type: PTYPES[x.type], titre: x.title, duree_min: x.min}; })
+        }; })
+      }; })
+    }; }),
+    journal: S.journal.map(function(j){ return {date:j.date, comportement:j.beh, ce_que_j_en_retiens:j.ret, comment_je_l_applique:j.app}; })
+  };
+  try{
+    var blob = new Blob([JSON.stringify(out, null, 2)], {type:"application/json"});
+    var url = URL.createObjectURL(blob), a = document.createElement("a");
+    a.href = url; a.download = "cahier-developpement.json";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    announce("Fichier JSON téléchargé.");
+  }catch(e){ announce("Le téléchargement n'a pas pu démarrer dans ce navigateur."); }
+});
+
+/* ---------- Thème ---------- */
+var themeBtn = document.getElementById("themeBtn"), THEMES = ["auto","light","dark"], THEMELAB = {auto:"auto", light:"clair", dark:"sombre"};
+function applyTheme(t){
+  if(t === "auto") document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.setAttribute("data-theme", t);
+  themeBtn.textContent = "Thème : " + THEMELAB[t];
+  themeBtn.setAttribute("aria-label", "Thème : " + THEMELAB[t] + ". Activer pour changer.");
+}
+var theme = sget(THEMEKEY); if(THEMES.indexOf(theme) < 0) theme = "auto";
+applyTheme(theme);
+themeBtn.addEventListener("click", function(){
+  theme = THEMES[(THEMES.indexOf(theme)+1) % 3]; applyTheme(theme); sset(THEMEKEY, theme);
+});
+
+/* ---------- Démarrage ---------- */
+renderCapnav(); renderCap(); renderJournal(); showStorageWarn();
+})();
+</script>
+</body>
+</html>
