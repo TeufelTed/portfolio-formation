@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Storyboard — Water Loss at Le Mérisier</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#e8ecf0; --surface:#ffffff; --surface-2:#f3f6f8; --line:#ccd6dd;
+    --ink:#101a24; --ink-2:#48586a; --ink-3:#6d7d8d;
+    --accent:#1a6480; --accent-soft:#dceaf1;
+    --warn-soft:#f5ead0; --warn:#8a6100;
+    --shadow:0 1px 2px rgba(16,26,36,.08), 0 8px 24px rgba(16,26,36,.06);
+    --serif:"IBM Plex Serif",Georgia,serif;
+    --sans:"IBM Plex Sans",-apple-system,Segoe UI,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --ground:#0d151c; --surface:#151f28; --surface-2:#1b262f; --line:#2c3a45;
+      --ink:#e9eef2; --ink-2:#a7b6c2; --ink-3:#8496a3;
+      --accent:#6fb6d2; --accent-soft:#1d3440;
+      --warn-soft:#332a14; --warn:#dfb75f;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --ground:#0d151c; --surface:#151f28; --surface-2:#1b262f; --line:#2c3a45;
+    --ink:#e9eef2; --ink-2:#a7b6c2; --ink-3:#8496a3;
+    --accent:#6fb6d2; --accent-soft:#1d3440;
+    --warn-soft:#332a14; --warn:#dfb75f;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;padding:0 16px;padding-block:0 48px}
+  .wrap{max-width:900px;margin:0 auto}
+  header{border-bottom:1px solid var(--line);padding-block:22px 16px;margin-bottom:24px}
+  .kicker{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
+  h1{font-family:var(--serif);font-size:clamp(23px,4vw,31px);font-weight:600;margin:6px 0 10px;letter-spacing:-.01em;text-wrap:balance}
+  p{margin:0 0 12px;max-width:70ch}
+  h2{font-family:var(--serif);font-size:20px;font-weight:600;margin:32px 0 12px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:18px 20px;box-shadow:var(--shadow);margin-bottom:16px}
+  .meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 22px}
+  .meta-grid div span{display:block;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-3);margin-bottom:2px}
+  .ecran{background:var(--surface);border:1px solid var(--line);border-radius:4px;box-shadow:var(--shadow);margin-bottom:18px;overflow:hidden}
+  .ecran-head{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between;background:var(--surface-2);border-bottom:1px solid var(--line);padding:11px 18px}
+  .ecran-head .no{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.06em}
+  .ecran-head .titre{font-family:var(--serif);font-size:17px;font-weight:600}
+  .ecran-head .type{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-3)}
+  .rows{display:grid}
+  .row{display:grid;grid-template-columns:172px 1fr;gap:0;border-bottom:1px solid var(--line)}
+  .row:last-child{border-bottom:none}
+  .row > .lab{background:var(--surface-2);border-right:1px solid var(--line);padding:11px 14px;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3)}
+  .row > .val{padding:11px 16px}
+  .row > .val p{margin:0 0 8px}
+  .row > .val p:last-child{margin:0}
+  @media (max-width:620px){
+    .row{grid-template-columns:1fr}
+    .row > .lab{border-right:none;border-bottom:1px solid var(--line)}
+  }
+  .audio{font-family:var(--mono);font-size:12.5px;color:var(--accent)}
+  ul{margin:0 0 8px;padding-left:20px}
+  li{margin-bottom:5px}
+  .note{background:var(--warn-soft);border:1px solid var(--warn);border-radius:3px;padding:12px 14px;font-size:14px;margin:16px 0}
+  code{font-family:var(--mono);font-size:13px;background:var(--surface-2);border:1px solid var(--line);border-radius:2px;padding:1px 5px}
+  footer{margin-top:32px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3);max-width:70ch}
+
+  .retour{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;background:var(--surface)}
+  .retour:hover{border-color:var(--accent);background:var(--accent-soft)}
+  .retour:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .retour-bas{margin-top:22px;display:flex;justify-content:center}
+
+  .toprow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+  .langsw{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;font-family:var(--mono);font-size:12px;letter-spacing:.05em;line-height:1.4}
+  .langsw a,.langsw span{padding:6px 11px;text-decoration:none}
+  .langsw span{background:var(--accent);color:var(--surface);font-weight:500}
+  .langsw a{color:var(--accent);background:var(--surface)}
+  .langsw a:hover{background:var(--accent-soft)}
+  .langsw a:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header>
+  <div class="toprow" style="margin-bottom:12px"><a class="retour" href="index.html">← Portfolio</a><nav class="langsw" aria-label="Language / Langue"><a href="../scenarimage.html" hreflang="fr" lang="fr">FR</a><span aria-current="page">EN</span></nav></div>
+  <div class="kicker">Storyboard · version 1.0 · September 2026</div>
+  <h1>Water Loss at Le Mérisier</h1>
+  <p>Production storyboard for the interactive module “Water Loss at Le Mérisier.” Template and content by Thierry De Gagné. The case, people, documents and amounts are fictitious.</p>
+</header>
+
+<div class="card">
+  <div class="meta-grid">
+    <div><span>Project lead</span>Thierry De Gagné</div>
+    <div><span>Instructional design</span>Thierry De Gagné</div>
+    <div><span>Subject matter expert</span>Fictitious — claims and co-ownership practice</div>
+    <div><span>Development</span>HTML and JavaScript, built through vibe coding</div>
+    <div><span>Target audience</span>Claims adjusters, property damage</div>
+    <div><span>Target duration</span>12 to 18 minutes, depending on the number of steps taken</div>
+    <div><span>Delivery</span>Standalone web page, no plug-in</div>
+    <div><span>Languages</span>French and English</div>
+  </div>
+</div>
+
+<h2>General guidelines</h2>
+<div class="card">
+  <div class="rows">
+    <div class="row"><div class="lab">Menu</div><div class="val">No free menu. Progress through locked steps: scenario, investigation, decision, feedback. Learners decide when to move to the next step, but cannot go back.</div></div>
+    <div class="row"><div class="lab">Structure</div><div class="val">Four main screens, a document reader in an overlay window, and a debrief assembled from the learner's actual path.</div></div>
+    <div class="row"><div class="lab">Characters</div><div class="val">Six contacts, reachable by phone or by email. Each has a distinct voice: the co-owner is exasperated, the property manager is efficient and a little curt, the chair thinks budget, the neighbour just wants repairs, the contractor talks job site, the broker is cautious.</div></div>
+    <div class="row"><div class="lab">Glossary</div><div class="val">Common portions · standard unit · betterment · deductible · syndicate · fraction. Terms are never defined out of context: learners discover them in the documents on file.</div></div>
+    <div class="row"><div class="lab">Variables</div><div class="val"><code>franchise</code> (deductible) drawn at random from $10,000, $15,000, $20,000 and $25,000 on each attempt · <code>demarches</code> action counter · <code>documents</code> list of documents obtained · <code>repartition</code> sorting answers.</div></div>
+    <div class="row"><div class="lab">Design rule</div><div class="val">No feedback reveals information the learner did not obtain through their own steps. Missing information is named as such, and each error is linked to the step that was skipped.</div></div>
+  </div>
+</div>
+
+<h2>Screens</h2>
+
+<div class="ecran">
+  <div class="ecran-head"><span class="no">Screen 01</span><span class="titre">Scenario</span><span class="type">static</span></div>
+  <div class="rows">
+    <div class="row"><div class="lab">Visual</div><div class="val">File header: number 26-8871, syndicate name, unit concerned. No illustration: the page looks like a claim file.</div></div>
+    <div class="row"><div class="lab">On-screen text</div><div class="val"><p>“You are the claims adjuster on this file.” Description of the loss: a fitting failed on a supply riser inside the party wall of 302; hardwood floor swelling, lower cabinets soaked, ceiling of 202 stained over two metres.</p><p>Objectives: choose whom to contact; tell common portions, the standard unit and betterments apart; allocate the damage; determine whether the syndicate's share exceeds the deductible.</p></div></div>
+    <div class="row"><div class="lab">Narration</div><div class="val"><p class="audio">NAR_01.mp3</p><p>“It's 8:15. Your first call of the day is from a co-owner who wants to know who pays for her floor. You have nothing on file yet.”</p></div></div>
+    <div class="row"><div class="lab">Feedback</div><div class="val">None.</div></div>
+    <div class="row"><div class="lab">Actions and branching</div><div class="val">“Open the file” button → screen 02. Permanent note at the bottom of the screen: fictitious case. The <code>franchise</code> variable is drawn on load.</div></div>
+  </div>
+</div>
+
+<div class="ecran">
+  <div class="ecran-head"><span class="no">Screen 02</span><span class="titre">Investigation</span><span class="type">interactive · core of the module</span></div>
+  <div class="rows">
+    <div class="row"><div class="lab">Visual</div><div class="val">Two areas. On the left, the six contacts, each with two buttons: Call, Email. On the right, the file thread as it grows, and the list of documents received.</div></div>
+    <div class="row"><div class="lab">On-screen text</div><div class="val"><p>Counter: “Steps taken: N · documents on file: N.” Instruction: a call gets an answer right away; an email brings back documents, but the reply arrives the next day.</p><p>No limit on steps. The instruction states that they will be compared, at the end, with the minimum required.</p></div></div>
+    <div class="row"><div class="lab">Narration</div><div class="val"><p class="audio">NAR_02.mp3</p><p>“It's up to you to decide whom you contact, and how. Every call gets an immediate answer; every email brings back documents, but costs you a day.”</p></div></div>
+    <div class="row"><div class="lab">Feedback</div><div class="val">No evaluative feedback at this step. Each step produces the contact's reply, and a note reading “Added to the file” or “Nothing new for the file.”</div></div>
+    <div class="row"><div class="lab">Actions and branching</div><div class="val">
+      <ul>
+        <li><strong>Property manager — email</strong>: declaration of co-ownership + syndicate's policy. <strong>Phone</strong>: gives the cause and refers to the chair for the schedule.</li>
+        <li><strong>Chair — email</strong>: schedule describing the standard unit. <strong>Phone</strong>: talks deductible and premiums, without giving the amount.</li>
+        <li><strong>Contractor — email</strong>: site report + repair estimate + plumber's invoice. <strong>Phone</strong>: on-site verdict, no figures.</li>
+        <li><strong>Co-owner — email</strong>: her policy, with the betterments endorsement. <strong>Phone</strong>: her version of events.</li>
+        <li><strong>Broker — email</strong>: copy of the syndicate's policy (alternate route). <strong>Phone</strong>: restates the principle, refuses to quote the deductible from memory.</li>
+        <li><strong>Neighbour in 202 — phone</strong> only: confirms the ceiling is original.</li>
+      </ul>
+      <p>Each step can be taken only once. “Move on to the decision” button active at all times → screen 03. Minimum path: three emails (property manager, chair, contractor).</p></div></div>
+  </div>
+</div>
+
+<div class="ecran">
+  <div class="ecran-head"><span class="no">Screen 02b</span><span class="titre">Reading a document</span><span class="type">overlay window</span></div>
+  <div class="rows">
+    <div class="row"><div class="lab">Visual</div><div class="val">Overlay window, document title, scrolling body, Close button. Laid out like an official excerpt: section headings in small capitals, running text, a table for the estimate.</div></div>
+    <div class="row"><div class="lab">On-screen text</div><div class="val"><ul>
+      <li><strong>Declaration of co-ownership</strong>: section 41, common portions, including risers that serve more than one fraction; section 42, which refers to a separate schedule; section 43, betterments remain the co-owner's responsibility.</li>
+      <li><strong>Description of the standard unit</strong>: schedule C adopted at the general meeting of June 12, 2019, six items listed, including nylon carpet or vinyl flooring and white melamine cabinets.</li>
+      <li><strong>Syndicate's policy</strong>: insured property, exclusion of betterments, deductible, amount varying with each attempt.</li>
+      <li><strong>Co-owner's policy</strong>: betterments endorsement $30,000, contents $60,000, deductible $1,000.</li>
+      <li><strong>Site report</strong>: cause, water category, inventory of damage by unit.</li>
+      <li><strong>Repair estimate</strong>: six items, total $34,600, with no allocation.</li>
+      <li><strong>Plumber's invoice</strong>: emergency call, $1,340, original fitting.</li>
+    </ul></div></div>
+    <div class="row"><div class="lab">Narration</div><div class="val">None. Reading is silent, as it is on a real file.</div></div>
+    <div class="row"><div class="lab">Feedback</div><div class="val">None.</div></div>
+    <div class="row"><div class="lab">Actions and branching</div><div class="val">Documents remain available on screen 03, during the decision. The policy text is generated with the <code>franchise</code> value drawn at the start of the attempt.</div></div>
+  </div>
+</div>
+
+<div class="ecran">
+  <div class="ecran-head"><span class="no">Screen 03</span><span class="titre">Allocation and deductible</span><span class="type">drag-and-drop + multiple choice</span></div>
+  <div class="rows">
+    <div class="row"><div class="lab">Visual</div><div class="val">Five labels to sort into two columns: syndicate's insurance, co-owner's insurance. The document list stays visible on the right. Below the sort, two multiple-choice questions.</div></div>
+    <div class="row"><div class="lab">On-screen text</div><div class="val"><p>Items to allocate: the fitting and the supply riser; the melamine cabinets in 302; the drywall ceiling in 202; the hardwood floor in 302; the living-room furniture.</p><p>Question 1: what is the deductible on the syndicate's policy? Four choices, from $10,000 to $25,000. Question 2: does the syndicate's insured share exceed that deductible? Two choices.</p></div></div>
+    <div class="row"><div class="lab">Narration</div><div class="val"><p class="audio">NAR_03.mp3</p><p>“Now allocate the damage, then tell me whether it's worth the syndicate's while to file a claim.”</p></div></div>
+    <div class="row"><div class="lab">Feedback</div><div class="val">None at this step: validation is delayed to prevent trial-and-error answers.</div></div>
+    <div class="row"><div class="lab">Actions and branching</div><div class="val">Drag and drop, or select the label and then the column, for touch and keyboard users. “Submit my answers” button inactive until all five labels are placed and both questions answered → screen 04.</div></div>
+  </div>
+</div>
+
+<div class="ecran">
+  <div class="ecran-head"><span class="no">Screen 04</span><span class="titre">Feedback and debrief</span><span class="type">assembled from the learner's path</span></div>
+  <div class="rows">
+    <div class="row"><div class="lab">Visual</div><div class="val">A line of results in figures, then one block per item, green or red, then the debrief notes in boxes.</div></div>
+    <div class="row"><div class="lab">On-screen text</div><div class="val"><p>Results: items correctly placed out of five · deductible correct or not · exceeding correct or not · number of steps against a required minimum of three.</p></div></div>
+    <div class="row"><div class="lab">Narration</div><div class="val"><p class="audio">NAR_04.mp3</p><p>“Let's look at your file.”</p></div></div>
+    <div class="row"><div class="lab">Positive feedback</div><div class="val"><ul>
+      <li>Riser: “The riser serves several fractions: it is a common portion (section 41).”</li>
+      <li>Cabinets: “The schedule places white melamine cabinets in the standard unit.”</li>
+      <li>Ceiling in 202: “Original painted drywall. The fact that the water came from another unit changes nothing.”</li>
+      <li>Floor: “The schedule provides for carpet or vinyl: hardwood is a betterment (section 43).”</li>
+      <li>Furniture: “Contents were never part of the building.”</li>
+    </ul></div></div>
+    <div class="row"><div class="lab">Negative feedback</div><div class="val">Same explanation, preceded by the answer given and the correct answer. No wording that judges the person.</div></div>
+    <div class="row"><div class="lab">Actions and branching</div><div class="val">
+      <p>Debrief notes displayed according to conditions, not all at once:</p>
+      <ul>
+        <li>schedule missing from the file → “you decided without the only document that says whether the hardwood is a betterment”;</li>
+        <li>declaration missing → nothing establishes that the riser is a common portion;</li>
+        <li>syndicate's policy missing → the deductible could only be guessed;</li>
+        <li>estimate missing → the comparison with the deductible rests on no figures;</li>
+        <li>report missing → the cause is not established in writing;</li>
+        <li>three steps or fewer and no errors → optimal path named explicitly;</li>
+        <li>more than six steps → the real cost of unnecessary steps for the insured.</li>
+      </ul>
+      <p>Note always displayed: the deductible remains the syndicate's responsibility and is not billed to the co-owner, even when her betterments are involved. “Start over” button: reset and new deductible draw.</p></div></div>
+  </div>
+</div>
+
+<h2>Expected answers</h2>
+<div class="card">
+  <div class="rows">
+    <div class="row"><div class="lab">Syndicate's insurance</div><div class="val">Fitting and riser · melamine cabinets in 302 · drywall ceiling in 202. Corresponding share: $19,500, i.e. plumbing and wall $4,200, cabinets $6,800, ceiling $3,100, drying $5,400.</div></div>
+    <div class="row"><div class="lab">Co-owner's insurance</div><div class="val">Hardwood floor $11,200 · furniture $3,900. Total of $15,100, excluded from the syndicate's deductible calculation.</div></div>
+    <div class="row"><div class="lab">Deductible</div><div class="val">Value drawn at random. With a $19,500 share: a claim is justified at $10,000 and $15,000; a claim is pointless at $20,000 and $25,000.</div></div>
+  </div>
+</div>
+
+<div class="note">The central trap of the scenario: the declaration of co-ownership is not enough. It refers to a schedule adopted at a general meeting, held only by the chair. A learner in a hurry concludes that the floor is covered by the syndicate, because nothing in the declaration says otherwise.</div>
+
+<footer>
+  Storyboard written by Thierry De Gagné, September 2026, for his portfolio. The template follows the production storyboards he used in corporate settings: one block per screen, on-screen text, narration with audio file names, separate feedback, and a column of actions and branching for the development team.
+</footer>
+<div class="retour-bas"><a class="retour" href="index.html">← Portfolio</a></div>
+</div>
+
+</body>
+</html>

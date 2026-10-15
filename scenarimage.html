@@ -73,6 +73,14 @@
   .retour:hover{border-color:var(--accent);background:var(--accent-soft)}
   .retour:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .retour-bas{margin-top:22px;display:flex;justify-content:center}
+
+  .toprow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+  .langsw{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;font-family:var(--mono);font-size:12px;letter-spacing:.05em;line-height:1.4}
+  .langsw a,.langsw span{padding:6px 11px;text-decoration:none}
+  .langsw span{background:var(--accent);color:var(--surface);font-weight:500}
+  .langsw a{color:var(--accent);background:var(--surface)}
+  .langsw a:hover{background:var(--accent-soft)}
+  .langsw a:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 </style>
 </head>
 <body>
@@ -80,7 +88,7 @@
 
 <div class="wrap">
 <header>
-  <div style="margin-bottom:12px"><a class="retour" href="index.html">← Portfolio</a></div>
+  <div class="toprow" style="margin-bottom:12px"><a class="retour" href="index.html">← Portfolio</a><nav class="langsw" aria-label="Langue / Language"><span aria-current="page">FR</span><a href="en/scenarimage.html" hreflang="en" lang="en">EN</a></nav></div>
   <div class="kicker">Scénarimage · version 1.0 · septembre 2026</div>
   <h1>Sinistre au Mérisier</h1>
   <p>Scénarimage de production du module interactif « Sinistre au Mérisier ». Gabarit et contenu de Thierry De Gagné. Le cas, les personnes, les documents et les montants sont fictifs.</p>
@@ -95,7 +103,7 @@
     <div><span>Public cible</span>Experts en sinistre, dommages matériels</div>
     <div><span>Durée visée</span>12 à 18 minutes, selon le nombre de démarches</div>
     <div><span>Diffusion</span>Page web autonome, sans plugiciel</div>
-    <div><span>Langues</span>Français ; version anglaise prévue</div>
+    <div><span>Langues</span>Français et anglais</div>
   </div>
 </div>
 

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thierry De Gagné Portfolio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#e8ecf0; --surface:#ffffff; --surface-2:#f3f6f8; --line:#ccd6dd;
+    --ink:#101a24; --ink-2:#48586a; --ink-3:#6d7d8d;
+    --accent:#1a6480; --accent-soft:#dceaf1;
+    --warn:#8a6100; --warn-soft:#f5ead0;
+    --shadow:0 1px 2px rgba(16,26,36,.08), 0 8px 24px rgba(16,26,36,.06);
+    --serif:"IBM Plex Serif",Georgia,serif;
+    --sans:"IBM Plex Sans",-apple-system,Segoe UI,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --ground:#0d151c; --surface:#151f28; --surface-2:#1b262f; --line:#2c3a45;
+      --ink:#e9eef2; --ink-2:#a7b6c2; --ink-3:#8496a3;
+      --accent:#6fb6d2; --accent-soft:#1d3440;
+      --warn:#dfb75f; --warn-soft:#332a14;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --ground:#0d151c; --surface:#151f28; --surface-2:#1b262f; --line:#2c3a45;
+    --ink:#e9eef2; --ink-2:#a7b6c2; --ink-3:#8496a3;
+    --accent:#6fb6d2; --accent-soft:#1d3440;
+    --warn:#dfb75f; --warn-soft:#332a14;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.6;padding:0 16px;padding-block:0 52px}
+  .wrap{max-width:860px;margin:0 auto}
+  header{padding-block:34px 20px;border-bottom:2px solid var(--accent);margin-bottom:8px}
+  .kicker{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent)}
+  h1{font-family:var(--serif);font-size:clamp(28px,5.4vw,42px);font-weight:600;margin:8px 0 6px;letter-spacing:-.02em;text-wrap:balance}
+  .sub{font-family:var(--serif);font-size:18px;color:var(--ink-2);max-width:60ch;margin:0 0 14px}
+  .coord{font-family:var(--mono);font-size:13px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:6px 16px}
+  p{margin:0 0 14px;max-width:68ch}
+  h2{font-family:var(--serif);font-size:25px;font-weight:600;margin:0 0 4px;text-wrap:balance}
+  h3{font-family:var(--sans);font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-3);margin:22px 0 8px}
+  section.piece{background:var(--surface);border:1px solid var(--line);border-radius:5px;box-shadow:var(--shadow);padding:26px 26px 24px;margin:26px 0}
+  .piece-no{font-family:var(--mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+  .lede{font-family:var(--serif);font-size:17.5px;line-height:1.6;color:var(--ink)}
+  .cta{display:inline-block;background:var(--accent);color:#fff;border-radius:3px;padding:10px 18px;text-decoration:none;font-weight:500;margin:6px 0 4px}
+  :root[data-theme="dark"] .cta,:root:not([data-theme="light"]) .cta{color:#08141a}
+  @media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .cta{color:#fff}}
+  .cta:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .fiche{display:grid;grid-template-columns:150px 1fr;border:1px solid var(--line);border-radius:4px;overflow:hidden;margin:14px 0 6px}
+  .fiche > div{padding:10px 14px;border-bottom:1px solid var(--line)}
+  .fiche > div:nth-child(odd){background:var(--surface-2);font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3)}
+  .fiche > div:nth-last-child(-n+2){border-bottom:none}
+  @media (max-width:600px){
+    .fiche{grid-template-columns:1fr}
+    .fiche > div{border-bottom:none}
+    .fiche > div:nth-child(even){border-bottom:1px solid var(--line);padding-top:0}
+  }
+  ul{margin:0 0 14px;padding-left:20px;max-width:68ch}
+  li{margin-bottom:6px}
+  figure{margin:16px 0 8px}
+  figure img{width:100%;max-width:100%;border:1px solid var(--line);border-radius:4px;display:block}
+  figcaption{font-size:13.5px;color:var(--ink-3);margin-top:7px;max-width:68ch}
+  figure.phone img{max-width:300px}
+  .note{background:var(--warn-soft);border:1px solid var(--warn);border-radius:4px;padding:14px 16px;font-size:14px;margin:20px 0;max-width:68ch}
+  footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink-3);max-width:68ch}
+  a{color:var(--accent)}
+
+  .toprow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+  .langsw{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;font-family:var(--mono);font-size:12px;letter-spacing:.05em;line-height:1.4}
+  .langsw a,.langsw span{padding:6px 11px;text-decoration:none}
+  .langsw span{background:var(--accent);color:var(--surface);font-weight:500}
+  .langsw a{color:var(--accent);background:var(--surface)}
+  .langsw a:hover{background:var(--accent-soft)}
+  .langsw a:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header>
+  <div style="display:flex;justify-content:flex-end;margin-bottom:6px"><nav class="langsw" aria-label="Language / Langue"><a href="../index.html" hreflang="fr" lang="fr">FR</a><span aria-current="page">EN</span></nav></div>
+  <div class="kicker">Portfolio · e-learning design and development</div>
+  <h1>Thierry De Gagné</h1>
+  <p class="sub">Instructional designer and e-learning developer. More than 25 years in training, including six with the claims adjusters of a major property and casualty insurer.</p>
+  <div class="coord"><span>tdegagne@gmail.com</span><span>514-812-6432</span><span>linkedin.com/in/tdegagne</span></div>
+</header>
+
+<div class="note">The training I designed for my employers belongs to them and cannot be shared. The pieces below were therefore created for this portfolio, on fictitious cases, using the same working methods.</div>
+
+<section class="piece">
+  <div class="piece-no">Piece 1 · interactive module</div>
+  <h2>Water Loss at Le Mérisier</h2>
+  <p class="lede">A playable scenario in which learners investigate before they decide. A water loss in a condominium: who pays for what, and is it worth the syndicate's while to file a claim?</p>
+  <p><a class="cta" href="module.html">Open the module</a></p>
+
+  <h3>The problem to solve</h3>
+  <p>Claims adjusters know condominium theory, but they often decide too early, before obtaining the documents that hold the answer. Training that explains the rule does not fix that. Training that makes them decide with an incomplete file does.</p>
+
+  <h3>Mechanics</h3>
+  <ul>
+    <li><strong>Open-ended investigation.</strong> Six contacts, reachable by phone or by email. A call gets an answer right away but nothing in writing; an email brings back documents, but costs a day.</li>
+    <li><strong>A living file.</strong> Replies stack up in a thread, and the documents obtained can be opened: declaration of co-ownership, schedule describing the standard unit, insurance policies, site report, repair estimate.</li>
+    <li><strong>Drag-and-drop decision</strong>, followed by two questions on the deductible. The deductible changes with every attempt: it cannot be answered without reading the policy.</li>
+    <li><strong>Debrief assembled from the learner's path.</strong> No feedback reveals information the learner did not ask for. Their steps are counted and compared with the minimum required.</li>
+  </ul>
+
+  <h3>Design sheet</h3>
+  <div class="fiche">
+    <div>Audience</div><div>Claims adjusters, property damage</div>
+    <div>Objectives</div><div>Choose whom to contact; tell common portions, the standard unit and betterments apart; allocate the damage; determine whether the syndicate's share exceeds its deductible</div>
+    <div>Duration</div><div>12 to 18 minutes, depending on the number of steps taken</div>
+    <div>Strategy</div><div>Learning through investigation and decision, with delayed feedback to prevent trial-and-error answers</div>
+    <div>Production</div><div>HTML and JavaScript, built through vibe coding with an AI coding agent; no dependencies, works on a phone</div>
+    <div>Variant</div><div>The deductible is drawn at random on each attempt, which makes the module replayable and keeps colleagues from passing the answer along</div>
+  </div>
+</section>
+
+<section class="piece">
+  <div class="piece-no">Piece 2 · production document</div>
+  <h2>The storyboard behind the module</h2>
+  <p class="lede">What I hand over to a development team: one block per screen, on-screen text, narration with audio file names, positive and negative feedback kept separate, and a column for actions and branching.</p>
+  <p><a class="cta" href="scenarimage.html">Read the storyboard</a></p>
+  <p>It also contains the general guidelines — menu, structure, characters, glossary, variables — and the table of expected answers with the amounts. It is the document that lets someone other than me build the module.</p>
+</section>
+
+<section class="piece">
+  <div class="piece-no">Piece 3 · bilingualism</div>
+  <h2>The module in two languages</h2>
+  <p class="lede">The scenario, the objectives and two pieces of feedback, in French and English side by side, followed by a record of the terminology choices.</p>
+  <p><a class="cta" href="../bilingue.html" hreflang="fr">See the bilingual version</a></p>
+  <p>This is where reviewing an insurance translation really happens: <em>franchise</em> becomes deductible, not franchise; <em>amélioration</em> becomes betterment; <em>parties communes</em> becomes common portions, not common areas. I deliver this record with the translation, so the team decides once and keeps the same vocabulary from one module to the next. The page itself is in French and English.</p>
+</section>
+
+<section class="piece">
+  <div class="piece-no">Piece 4 · field tools</div>
+  <h2>Tools built with AI, used every day</h2>
+  <p class="lede">In my current role, I designed and deployed, with AI coding agents, web applications my team uses on their phones. Here are three, chosen because their structure is that of a training system.</p>
+
+  <h3>Maintenance tracking</h3>
+  <figure class="phone">
+    <img src="../img/griffin-mobile.jpg" alt="The application on a phone: tasks, verdicts, a notes field with microphone and photo, full screen width.">
+    <figcaption>The tool as it is actually used: on the employee's phone, standing in the building. Everything is done with a thumb, one hand free. (Interface in French.)</figcaption>
+  </figure>
+  <figure>
+    <img src="../img/griffin-semaine.jpg" alt="Week view: count of completed tasks, hours worked, tasks grouped by area with Done, Postponed and N/A buttons.">
+    <figcaption>Each task shows its frequency and three verdicts: Done, Postponed, N/A. The hours block is set with a thumb, and the completed-task counter shows progress at a glance.</figcaption>
+  </figure>
+  <figure>
+    <img src="../img/griffin-note-photo.jpg" alt="Task marked Done, with date and author, a Notes field with a dictation button, a Photo button and the thumbnail of the uploaded photo.">
+    <figcaption>Proof of work done: a note that can be dictated rather than typed, and a photo taken on site. Date and author are recorded automatically.</figcaption>
+  </figure>
+
+  <h3>The inspection checklist and its report</h3>
+  <figure>
+    <img src="../img/inspection-grille.jpg" alt="Inspection checklist: navigation by area with progress figures, Yes or No criteria, a dictated note and up to six captioned photos.">
+    <figcaption>The checklist: 262 items grouped by area, each with its progress figure. A "No" flips the line and opens the entry — a dictated note, up to six photos, each with its caption.</figcaption>
+  </figure>
+  <figure>
+    <img src="../img/inspection-rapport.jpg" alt="Inspection report: summary banner, list of items to correct, then a detailed table by area.">
+    <figcaption>The report the tool produces. A summary banner, then the seven items to correct up front, each with its full path and the number of photos supporting it. The detail comes after.</figcaption>
+  </figure>
+  <figure>
+    <img src="../img/inspection-detail.jpg" alt="Report detail: table by criterion with the result in green or red, and supporting photos attached to non-conformities.">
+    <figcaption>In the detail, the evidence stays attached to the finding: photos sit with the failing line, not in an appendix at the end.</figcaption>
+  </figure>
+
+  <h3>The meeting loop</h3>
+  <figure>
+    <img src="../img/reunions-flux.jpg" alt="Meeting management tool: four steps — Collection, Agenda, Minutes, Follow-up — then files sorted by category and status.">
+    <figcaption>A third tool, shown here without its content: four steps in sequence — collecting topics, agenda, minutes, then the follow-up list. Every decision made in a meeting becomes a dated item that stays open until it is closed.</figcaption>
+  </figure>
+  <p>It is the same problem as an action plan after training: commitments made together end up in a document nobody opens again. Here, the minutes feed the follow-up list directly, and follow-up returns to the agenda of the next meeting.</p>
+
+  <h3>What it means for training</h3>
+  <p>These tools share the backbone of a competency observation system: an observable criterion, a verdict, a record. The inspection checklist goes further — it produces its own report, and that report starts with the gaps rather than the full list. That is exactly what you want from an observation report after training: whoever receives it knows what to do within ten seconds.</p>
+  <p>Dictation is not a gimmick: it is what makes documenting possible with gloves on, on a ladder or in a flooded basement. The captioned photo replaces the report nobody will write that evening. And progress by area plays the role of a progress bar in a learning path.</p>
+  <p>I took each of these tools from needs analysis to adoption by a non-technical user. It is performance engineering, applied to my own team.</p>
+  <p class="note" style="margin-top:18px">Screenshots of a real application in use. Names, the building number and identifying data have been replaced.</p>
+</section>
+
+<section class="piece">
+  <div class="piece-no">Piece 5 · development instrument</div>
+  <h2>The competency development workbook</h2>
+  <p class="lede">A self-assessment workbook for a rotation program leading to the role of account manager in commercial banking. Participants assess themselves, their mentor validates, and the cohort view shows where the path gets stuck.</p>
+  <p><a class="cta" href="cahier.html">Open the workbook</a></p>
+
+  <h3>The problem to solve</h3>
+  <p>In a development program, participants are tracked one by one. You can see who is behind, but not that the same capability is blocking everyone, nor that a whole cohort believes it has mastered a behaviour the mentors do not see yet. Neither signal is a matter for individual coaching: both call the program's design into question.</p>
+
+  <h3>Mechanics</h3>
+  <ul>
+    <li><strong>Two statuses per behaviour.</strong> The participant's and the one validated by the mentor. The gap shows as soon as there is one: it is a coaching topic in itself.</li>
+    <li><strong>Exit criterion recalculated live.</strong> Each level is cleared with all behaviours validated as demonstrated but one, including the mandatory behaviour.</li>
+    <li><strong>Learning nuggets.</strong> Two or three short resources per behaviour — e-learning capsule, video, text, infographic, checklist — with their duration.</li>
+    <li><strong>Heat map and cohort view.</strong> The first aggregates one participant's statuses; the second highlights the capability that is blocking and the behaviours the cohort overrates.</li>
+    <li><strong>Transfer journal.</strong> What I take away, and how I apply it to a current file.</li>
+  </ul>
+
+  <h3>Design sheet</h3>
+  <div class="fiche">
+    <div>Audience</div><div>Participants in a rotation program, their mentors and the program lead</div>
+    <div>Structure</div><div>5 capabilities tied to performance areas, 3 levels (exposure, guided, independent), 69 observable behaviours</div>
+    <div>Activities</div><div>Coaching, observation, demonstration, lab, e-learning</div>
+    <div>Production</div><div>HTML and JavaScript with no dependencies, built through vibe coding with an AI coding agent; entries stay in the browser and can be exported as JSON</div>
+    <div>Origin</div><div>Mechanics drawn from an assessment workbook I designed in a corporate setting; program, content and data entirely rewritten and fictitious</div>
+  </div>
+</section>
+
+<footer>
+  Portfolio prepared in September 2026. The module and the storyboard were designed and written by Thierry De Gagné; development was done through vibe coding with an AI coding agent, using the same method as the tools shown in piece 4. English version by the author.
+</footer>
+</div>
+</body>
+</html>

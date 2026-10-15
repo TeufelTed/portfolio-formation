@@ -232,6 +232,14 @@
   .storage-warn.on{display:block}
   footer{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink-3);max-width:70ch;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  .toprow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+  .langsw{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;font-family:var(--mono);font-size:12px;letter-spacing:.05em;line-height:1.4}
+  .langsw a,.langsw span{padding:6px 11px;text-decoration:none}
+  .langsw span{background:var(--accent);color:var(--surface);font-weight:500}
+  .langsw a{color:var(--accent);background:var(--surface)}
+  .langsw a:hover{background:var(--accent-soft)}
+  .langsw a:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 </style>
 </head>
 <body>
@@ -239,7 +247,7 @@
 <header>
   <div class="topbar">
     <a class="retour" href="index.html">← Portfolio</a>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Changer de thème">Thème : auto</button>
+    <span style="display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap"><nav class="langsw" aria-label="Langue / Language"><span aria-current="page">FR</span><a href="en/cahier.html" hreflang="en" lang="en">EN</a></nav><button class="tbtn" id="themeBtn" type="button" aria-label="Changer de thème">Thème : auto</button></span>
   </div>
   <div class="kicker">Pièce 5 · instrument de développement · démonstration</div>
   <h1>Cahier de développement des compétences</h1>
